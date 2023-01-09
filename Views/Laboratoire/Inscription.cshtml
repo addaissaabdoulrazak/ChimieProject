@@ -1,0 +1,127 @@
+﻿@model ChimieProject.Models.Entities.LaboratoireDto;
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout";
+}
+<!-- Form Mixin-->
+<!-- Input Mixin-->
+<!-- Button Mixin-->
+<!-- Pen Title-->
+@*<div class="pen-title">
+    <h1>Flat Login Form</h1><span>Pen <i class='fa fa-paint-brush'></i> + <i class='fa fa-code'></i> by <a href='http://andytran.me'>Andy Tran</a></span>
+</div>*@
+<div class="pen-title"></div>
+<!-- Form Module-->
+@*--[Call Partial view Notification]--*@
+<partial name="_Notification">
+    <div class="module form-module">
+
+        <div class="toggle">
+            @*   <i class="fa fa-times fa-pencil"></i>*@
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+            </svg>
+            <div class="tooltip">Click Me</div>
+        </div>
+        <div class="border p-3 mt-4">
+            <div class="form">
+
+                <h2>Login to your account</h2>
+                <form asp-action="Login" asp-controller="Laboratoire">
+                    <div>
+                        <label asp-for="Nom" class="col-sm-2 col-form-label"></label>
+                        <input asp-for="Nom" class="form-control" placeholder="Nom" />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+
+
+                    <div>
+                        <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+                        <input type="password" placeholder="Password" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger "></span>
+                    </div>
+
+
+                    <button>Login</button>
+                </form>
+            </div>
+            <div class="form">
+                <h2>Create an account</h2>
+                <form asp-action="Inscription" asp-controller="Laboratoire" method="post">
+
+                    <div class="mb-1">
+                        <label asp-for="Nom" class="col-sm-2 col-form-label"></label>
+                        <input asp-for="Nom" class="form-control" />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="mb-1">
+                        <label asp-for="Acronyme" class="col-sm-2 col-form-label"></label>
+                        <input asp-for="Acronyme" class="form-control" />
+                        <span asp-validation-for="Acronyme" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="mb-1">
+                        <label asp-for="Responsable" class="col-sm-2 col-form-label"></label>
+                        <select asp-for="Responsable" class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="manager" class="form-control">manager</option>
+                            <option value="Chimiste" class="form-control">Chimiste</option>
+                        </select>
+                        <span asp-validation-for="Responsable" class="text-danger"></span>
+                    </div>
+
+
+
+                    <div class="mb-1">
+                        <label asp-for="Etablissement" class="col-sm-2 col-form-label mt-4"></label>
+                        <select asp-for="Etablissement" class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="Université de Tunis" class="form-control">Université de Tunis</option>
+                            <option value="Université de Monastir" class="form-control">Université de Monastir</option>
+                            <option value="Université de Gabès" class="form-control">Université de Gabès</option>
+                            <option value="Université de Sousse" class="form-control">Université de Sousse</option>
+                            <option value="Université de Jendouba" class="form-control">Université de Jendouba</option>
+                            <option value="Université de Carthage" class="form-control">Université de Carthage</option>
+                            <option value="Université de Sfax" class="form-control">Université de Sfax</option>
+                            <option value="Université de Gafsa" class="form-control">Université de Gafsa</option>
+                        </select>
+                        <span asp-validation-for="Etablissement" class="text-danger"></span>
+                    </div>
+
+
+
+
+
+                    <div class="mb-1">
+                        <label asp-for="Email" class="col-sm-2 col-form-label mt-4"></label>
+                        <input asp-for="Email" class="form-control" type="email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="mb-1">
+                        <label asp-for="Tel" class="col-sm-2 col-form-label"></label>
+                        <input asp-for="Tel" class="form-control" type="tel" />
+                        <span asp-validation-for="Tel" class="text-danger"></span>
+                    </div>
+
+                    <div class="">
+                        <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <button class="mt-3">Register</button>
+                </form>
+            </div>
+        </div>
+        <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div>
+    </div>
+    @section Scripts{
+        @{
+            <partial name="_ValidationScriptsPartial" />
+        }
+    }

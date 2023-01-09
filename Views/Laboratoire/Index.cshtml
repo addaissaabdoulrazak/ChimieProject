@@ -1,0 +1,177 @@
+﻿@{
+
+    Layout = "_Admin";
+}
+
+@model IEnumerable<ChimieProject.Models.Entities.Laboratoire>
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-6">
+        <h2 class="text-info">Laboratoire List</h2>
+    </div>
+    <div class="col-11 border p-3">
+        <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Etablissement</th>
+                    <th>Email</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="20%">
+                            @obj.Nom
+                        </td>
+                        <td width="20%">
+                            @obj.Etablissement
+                        </td>
+                        <td width="20%">
+                            @obj.Email
+                        </td>
+
+                        @if (obj.Statut != 1)
+                        {
+                            <td width="20%" class="text-danger">
+                                <strong>Demande</strong>
+                            </td>
+
+                            <td width="50">
+                                <div class="w-75 btn-group" role="group">
+                                    <a class="text-success" onclick=Accept(@obj.Id)>
+                                        <i class="fa-solid fa-circle-check fa-3x"></i>Accepter
+                                    </a>
+                                    <a  class="text-danger" onclick="return Decline(@(obj.Id))">
+                                        <i class="fa-solid fa-circle-xmark fa-3x"></i>
+                                        Décliner
+                                    </a>
+                                </div>
+                            </td>
+                        }
+                        else
+                        {
+                            <td width="20%" class="text-success">
+                                <strong>Actif</strong>
+                            </td>
+
+                            <td width="50">
+                                <div class="w-75 btn-group" role="group">
+                                    <a  class="text-success" onclick=lock(@obj.Id)>
+                                        <i class="fa-solid fa-lock fa-3x"></i>
+                                        lock
+                                    </a>
+                                    <a  class="text-danger" onclick="return unlock(@(obj.Id))">
+                                        <i class="fa-solid fa-lock-open fa-3x"></i>
+                                        unlock
+                                    </a>
+                                </div>
+                            </td>
+                        }
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @*pagination Processuce en cour de traitement ..........*@
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+@section Scripts{
+    @{
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    }
+    <script>
+
+        //decline function
+        function Decline(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "want you to decline this account!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, decline it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/Laboratoire/Decline",
+                        data:{id:id},
+                        success: function (data) {
+                            if (data.success) {
+                                alert(data.message)
+                                location.reload();
+                            }
+                            else {
+                               alert(data.message);
+                            }
+                        }
+                    });
+                    
+                }
+            })
+        }
+
+        //Accept function
+        function Accept(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "do you want to accept this account!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, accept it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Laboratoire/Accept",
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.success) {
+                                alert(data.message)
+                                location.reload();
+                            }
+                            else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+                }
+            })
+        }
+
+        
+
+
+    </script>
+}
+
+

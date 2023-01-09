@@ -1,0 +1,234 @@
+﻿using ChimieProject.Models.Entities;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace ChimieProject.Models.DAL
+{
+    public class DAL_EchangeLot
+    {
+
+            #region Default Methods
+            public static EchangeLot Get(long id)
+            {
+                var dataTable = new DataTable();
+                using (SqlConnection sqlConnection = DBConnection.GetConnection())
+                {
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM [EchangeLot] WHERE [Id]=@Id";
+                    var sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("Id", id);
+
+                    new SqlDataAdapter(sqlCommand).Fill(dataTable);
+
+                }
+
+                if (dataTable.Rows.Count > 0)
+                {
+                    return new EchangeLot(dataTable.Rows[0]);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            public static List<EchangeLot> Get()
+            {
+                var dataTable = new DataTable();
+                using (SqlConnection sqlConnection = DBConnection.GetConnection())
+                {
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM [EchangeLot]";
+                    var sqlCommand = new SqlCommand(query, sqlConnection);
+
+                    new SqlDataAdapter(sqlCommand).Fill(dataTable);
+                }
+
+                if (dataTable.Rows.Count > 0)
+                {
+                    return dataTable.Rows.Cast<DataRow>().Select(x => new EchangeLot(x)).ToList();
+                }
+                else
+                {
+                    return new List<EchangeLot>();
+                }
+            }
+
+            public static long Insert(EchangeLot item)
+            {
+                long response = long.MinValue;
+                using (SqlConnection sqlConnection = DBConnection.GetConnection())
+                {
+                    sqlConnection.Open();
+                    var sqlTransaction = sqlConnection.BeginTransaction();
+
+                    string query = "INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Purete],[Quantite],[UniteQuantite])  VALUES (@Concentration,@DatePeremption,@DatePublication,@IdLabo,@IdProduit,@Purete,@Quantite,@UniteQuantite); ";
+                    query += "SELECT SCOPE_IDENTITY();";
+
+                    using (var sqlCommand = new SqlCommand(query, sqlConnection, sqlTransaction))
+                    {
+
+                        sqlCommand.Parameters.AddWithValue("Concentration", item.Concentration);
+                        sqlCommand.Parameters.AddWithValue("DatePeremption", item.DatePeremption);
+                        sqlCommand.Parameters.AddWithValue("DatePublication", item.DatePublication);
+                        sqlCommand.Parameters.AddWithValue("IdLabo", item.IdLabo);
+                        sqlCommand.Parameters.AddWithValue("IdProduit", item.IdProduit);
+                        sqlCommand.Parameters.AddWithValue("Purete", item.Purete);
+                        sqlCommand.Parameters.AddWithValue("Quantite", item.Quantite);
+                        sqlCommand.Parameters.AddWithValue("UniteQuantite", item.UniteQuantite);
+
+                        var result = sqlCommand.ExecuteScalar();
+                        response = result == null ? long.MinValue : long.TryParse(result.ToString(), out var insertedId) ? insertedId : long.MinValue;
+                    }
+                    sqlTransaction.Commit();
+
+                    return response;
+                }
+            }
+
+            private static int insert(List<EchangeLot> items)
+            {
+                if (items != null && items.Count > 0)
+                {
+                    int results = -1;
+                    using (SqlConnection sqlConnection = DBConnection.GetConnection())
+                    {
+                        sqlConnection.Open();
+                        string query = "";
+                        var sqlCommand = new SqlCommand(query, sqlConnection);
+
+                        int i = 0;
+                        foreach (var item in items)
+                        {
+                            i++;
+                            query += " INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Purete],[Quantite],[UniteQuantite]) VALUES ( "
+
+                                + "@Concentration" + i + ","
+                                + "@DatePeremption" + i + ","
+                                + "@DatePublication" + i + ","
+                                + "@IdLabo" + i + ","
+                                + "@IdProduit" + i + ","
+                                + "@Purete" + i + ","
+                                + "@Quantite" + i + ","
+                                + "@UniteQuantite" + i
+                                + "); ";
+
+
+                            sqlCommand.Parameters.AddWithValue("Concentration" + i, item.Concentration);
+                            sqlCommand.Parameters.AddWithValue("DatePeremption" + i, item.DatePeremption);
+                            sqlCommand.Parameters.AddWithValue("DatePublication" + i, item.DatePublication);
+                            sqlCommand.Parameters.AddWithValue("IdLabo" + i, item.IdLabo);
+                            sqlCommand.Parameters.AddWithValue("IdProduit" + i, item.IdProduit);
+                            sqlCommand.Parameters.AddWithValue("Purete" + i, item.Purete);
+                            sqlCommand.Parameters.AddWithValue("Quantite" + i, item.Quantite);
+                            sqlCommand.Parameters.AddWithValue("UniteQuantite" + i, item.UniteQuantite);
+                        }
+
+                        sqlCommand.CommandText = query;
+
+                        results = sqlCommand.ExecuteNonQuery();
+                    }
+
+                    return results;
+                }
+
+                return -1;
+            }
+
+            public static int Update(EchangeLot item)
+            {
+                int results = -1;
+                using (SqlConnection sqlConnection = DBConnection.GetConnection())
+                {
+                    sqlConnection.Open();
+                    string query = "UPDATE [EchangeLot] SET [Concentration]=@Concentration, [DatePeremption]=@DatePeremption, [DatePublication]=@DatePublication, [IdLabo]=@IdLabo, [IdProduit]=@IdProduit, [Purete]=@Purete, [Quantite]=@Quantite, [UniteQuantite]=@UniteQuantite WHERE [Id]=@Id";
+                    var sqlCommand = new SqlCommand(query, sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("Id", item.Id);
+                    sqlCommand.Parameters.AddWithValue("Concentration", item.Concentration);
+                    sqlCommand.Parameters.AddWithValue("DatePeremption", item.DatePeremption);
+                    sqlCommand.Parameters.AddWithValue("DatePublication", item.DatePublication);
+                    sqlCommand.Parameters.AddWithValue("IdLabo", item.IdLabo);
+                    sqlCommand.Parameters.AddWithValue("IdProduit", item.IdProduit);
+                    sqlCommand.Parameters.AddWithValue("Purete", item.Purete);
+                    sqlCommand.Parameters.AddWithValue("Quantite", item.Quantite);
+                    sqlCommand.Parameters.AddWithValue("UniteQuantite", item.UniteQuantite);
+
+                    results = sqlCommand.ExecuteNonQuery();
+                }
+
+                return results;
+            }
+
+            private static int update(List<EchangeLot> items)
+            {
+                if (items != null && items.Count > 0)
+                {
+                    int results = -1;
+                    using (SqlConnection sqlConnection = DBConnection.GetConnection())
+                    {
+                        sqlConnection.Open();
+                        string query = "";
+                        var sqlCommand = new SqlCommand(query, sqlConnection);
+
+                        int i = 0;
+                        foreach (var item in items)
+                        {
+                            i++;
+                            query += " UPDATE [EchangeLot] SET "
+
+                                + "[Concentration]=@Concentration" + i + ","
+                                + "[DatePeremption]=@DatePeremption" + i + ","
+                                + "[DatePublication]=@DatePublication" + i + ","
+                                + "[IdLabo]=@IdLabo" + i + ","
+                                + "[IdProduit]=@IdProduit" + i + ","
+                                + "[Purete]=@Purete" + i + ","
+                                + "[Quantite]=@Quantite" + i + ","
+                                + "[UniteQuantite]=@UniteQuantite" + i + " WHERE [Id]=@Id" + i
+                                + "; ";
+
+                            sqlCommand.Parameters.AddWithValue("Id" + i, item.Id);
+                            sqlCommand.Parameters.AddWithValue("Concentration" + i, item.Concentration);
+                            sqlCommand.Parameters.AddWithValue("DatePeremption" + i, item.DatePeremption);
+                            sqlCommand.Parameters.AddWithValue("DatePublication" + i, item.DatePublication);
+                            sqlCommand.Parameters.AddWithValue("IdLabo" + i, item.IdLabo);
+                            sqlCommand.Parameters.AddWithValue("IdProduit" + i, item.IdProduit);
+                            sqlCommand.Parameters.AddWithValue("Purete" + i, item.Purete);
+                            sqlCommand.Parameters.AddWithValue("Quantite" + i, item.Quantite);
+                            sqlCommand.Parameters.AddWithValue("UniteQuantite" + i, item.UniteQuantite);
+                        }
+
+                        sqlCommand.CommandText = query;
+
+                        results = sqlCommand.ExecuteNonQuery();
+                    }
+
+                    return results;
+                }
+
+                return -1;
+            }
+
+            public static int Delete(long id)
+            {
+                int results = -1;
+                using (SqlConnection sqlConnection = DBConnection.GetConnection())
+                {
+                    sqlConnection.Open();
+                    string query = "DELETE FROM [EchangeLot] WHERE [Id]=@Id";
+                    var sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("Id", id);
+
+                    results = sqlCommand.ExecuteNonQuery();
+                }
+
+                return results;
+            }
+
+            #endregion
+
+            #region Custom Methods
+
+            #endregion
+    }
+}

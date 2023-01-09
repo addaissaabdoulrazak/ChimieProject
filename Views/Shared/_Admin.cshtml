@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ChimieProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+    @*--Sidebar--*@
+    <link rel="stylesheet" href="~/css/sidebar.css" asp-append-version="true" />
+    @*--Sidebar--*@
+    @*--fontAwesome--*@
+    <link rel="stylesheet" href="~/font-awesome/css/all.css" asp-append-version="true" />
+    @*--fontAwesome--*@
+    <link rel="stylesheet" href="~/ChimieProject.styles.css" asp-append-version="true" />
+    @*--Toastr js--*@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
+    @*--Toastr js--*@
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand text-secondary" href="#">put a Image here after....(En cours)</a>
+                </div>
+
+                @*--Nav Bar--*@
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                            <ul class="navbar-nav me-2 mb-1 mb-lg-2 me-4">
+
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Dropdown <i class="fa fa-user fa-fw"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li> <a href="#" class="text-secondary m-3" style="text-decoration:none"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+                                        <li> <a href="#" class="text-secondary m-3" style="text-decoration:none"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+                                        <li>
+                                            <a asp-action="Acceuil" asp-controller="Laboratoire" class="text-secondary m-3" style="text-decoration:none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                                                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
+                                                </svg>
+                                                Acceuil
+                                            </a>
+                                        </li>
+                                        <hr />
+                                        <li class="divider"></li>
+                                        <li><a asp-action="LogOut" asp-controller="Laboratoire" class="text-secondary m-3" style="text-decoration:none"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                @*--Nav Bar--*@
+            </div><!-- /.container-fluid -->
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - ChimieProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Login.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

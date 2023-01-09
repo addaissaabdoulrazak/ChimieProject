@@ -1,0 +1,113 @@
+﻿@model ChimieProject.Models.Entities.EchangeLot;
+@{
+
+    Layout = "_Layout";
+
+    var objProduitList = ViewBag.objProduitList;
+
+    var objLaboratoireList = ViewBag.objLaboratoireList;
+}
+<partial name="_Notification">
+    <div class="border container" style="padding:30px;">
+        <form method="post" asp-action="Create" asp-controller="EchangeLot">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+            <div class="row pb-2">
+                <h2 class="text-primary">Create</h2>
+                <hr />
+            </div>
+
+            @*Labo Liste*@
+            <div class="row mb-3">
+                <label asp-for="IdLabo" class="col-sm-2 col-form-label">Non du Labratoire</label>
+                <div class="col-sm-10">
+                    <select asp-for="IdLabo" class="form-select" aria-label="Default select example">
+                        <option selected>ouvrir ce menu de sélection</option>
+                        @foreach (var lab in @objLaboratoireList)
+                        {
+                          <option value="@lab.Id">@lab.Nom</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdLabo" class="text-danger"></span>
+                </div>
+            </div>
+            @*fin*@
+
+            @*Produit Liste*@
+            <div class="row mb-3">
+                <label asp-for="IdProduit" class="col-sm-2 col-form-label">Nom Produit</label>
+                <div class="col-sm-10">
+                    <select asp-for="IdProduit" class="form-select" aria-label="Default select example">
+                        <option selected>ouvrir ce menu de sélection</option>
+                        @foreach (var product in @objProduitList)
+                        {
+                            <option value="@product.Id">@product.Nom</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdProduit" class="text-danger"></span>
+                </div>
+            </div>
+            @*fin*@
+
+            <div class="row mb-3">
+                <label asp-for="DatePublication" class="col-sm-2 col-form-label"></label>
+
+                <div class="col-sm-10">
+                    <input asp-for="DatePublication" class="form-control" type="date"/>
+                    <span asp-validation-for="DatePublication" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Purete" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Purete" class="form-control" type="text"/>
+                    <span asp-validation-for="Purete" class="text-danger"></span>
+                </div>
+            </div>  
+            <div class="row mb-3">
+                <label asp-for="Concentration" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Concentration" class="form-control" type="text"/>
+                    <span asp-validation-for="Concentration" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label asp-for="DatePeremption " class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="DatePeremption " class="form-control" type="date" />
+                    <span asp-validation-for="DatePeremption " class="text-danger"></span>
+                </div>
+            </div>
+           <div class="row mb-3">
+                <label asp-for="Quantite " class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Quantite " class="form-control" type="number" />                  
+                    <span asp-validation-for="Quantite " class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="UniteQuantite " class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="UniteQuantite " class="form-control" type="text" />    
+                    <span asp-validation-for="UniteQuantite " class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3 offset-3">
+                    <button type="submit" class="btn btn-primary form-control">
+                        Créer
+                    </button>
+                </div>
+                <div class="col-3">
+                    <a asp-action="Index" asp-controller="EchangeLot" class="btn btn-success form-control">Retour a la Liste</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    @section Scripts{
+        @{
+            <partial name="_ValidationScriptsPartial" />
+        }
+    }
+
