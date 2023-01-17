@@ -13,7 +13,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="row">
-                  
+
                     <span style="font-size:large;color:forestgreen;">
 
                         <a class="navbar-brand" href="#"> SB Admin v2.0 (@User.Identity.Name)</a>
@@ -21,7 +21,7 @@
                 </div>
 
             }
-            
+
         </div>
     </nav>
 
@@ -34,7 +34,7 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-5 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">1</div>
-                                <div>Gestion publications d'échanges </div>
+                                <div>Gestion publications</div>
                             </div>
                         </div>
                     </div>
@@ -71,11 +71,33 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">2</div>
-                                <div>Gestion des Laboratoires</div>
+                                <div>Gestion des Structures</div>
                             </div>
                         </div>
                     </div>
-                    <a asp-action="Index" asp-controller="Laboratoire">
+                    <a asp-action="Index" asp-controller="Structure">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3"> 
+                                <i class="fa-sharp fa-solid fa-gears fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">3</div>
+                                <div>Setting Management</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-action="SettingManagement" asp-controller="Structure">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

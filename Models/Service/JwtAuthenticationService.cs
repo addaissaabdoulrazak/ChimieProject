@@ -1,4 +1,4 @@
-﻿using AuthenticationProject.Models.BLL;
+﻿
 using ChimieProject.Models.BLL;
 using ChimieProject.Models.Entities;
 using Microsoft.IdentityModel.Tokens;
@@ -14,9 +14,9 @@ namespace ChimieProject.Models.Service
         //private readonly IConfiguration _configuration; 
 
 
-        public Laboratoire Authenticate(string Nom)
+        public Structure Authenticate(string Nom)
         {
-            Laboratoire objLabo = BLL_Laboratoire.GetElementByName(Nom);
+            Structure objLabo = BLL_Structure.GetElementByName(Nom);
 
             return objLabo;
         }
@@ -69,7 +69,7 @@ namespace ChimieProject.Models.Service
 
         private const double EXPIRY_DURATION_MINUTES = 30;
 
-        public string BuildToken(string key, string issuer, Laboratoire objLab)
+        public string BuildToken(string key, string issuer, Structure objLab)
         {
             var claims = new[] {
             new Claim(ClaimTypes.Name, objLab.Nom),

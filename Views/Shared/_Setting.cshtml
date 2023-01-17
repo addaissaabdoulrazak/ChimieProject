@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ChimieProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+       <link rel="stylesheet" href="~/css/setting.css" asp-append-version="true" />
+    @*--fontAwesome--*@
+    <link rel="stylesheet" href="~/font-awesome/css/all.css" asp-append-version="true" />
+    @*--fontAwesome--*@
+    <link rel="stylesheet" href="~/ChimieProject.styles.css" asp-append-version="true" />
+    @*--Toastr js--*@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
+    @*--Toastr js--*@
+    @*--Datatable--*@
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" asp-append-version="true" />
+    @*--Datatable--*@
+  
+</head>
+
+<body class="sidebar-is-reduced">
+    <header class="l-header">
+        <div class="l-header__inner clearfix">
+            <div class="c-header-icon js-hamburger">
+                <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
+            </div>
+            <div class="c-header-icon has-dropdown">
+                <span class="c-badge c-badge--red c-badge--header-icon animated swing">13</span><i class="fa fa-bell"></i>
+                <div class="c-dropdown c-dropdown--notifications">
+                    <div class="c-dropdown__header"></div>
+                    <div class="c-dropdown__content"></div>
+                </div>
+            </div>
+            <div class="c-search">
+                <input class="c-search__input u-input" placeholder="Search..." type="text" />
+            </div>
+            <div class="header-icons-group">
+                <div class="c-header-icon basket"><span class="c-badge c-badge--blue c-badge--header-icon animated swing">4</span><i class="fa fa-shopping-basket"></i></div>
+                <div class="c-header-icon logout"><i class="fa fa-power-off"></i></div>
+            </div>
+        </div>
+    </header>
+    <div class="l-sidebar">
+        <div class="logo">
+            <div class="logo__txt">D</div>
+        </div>
+        <div class="l-sidebar__content">
+            <nav class="c-menu js-menu">
+                <ul class="u-list">
+                    <li class="c-menu__item is-active" data-toggle="tooltip" title="Flights">
+                        <div class="c-menu__item__inner">
+                            <i class="fa fa-plane"></i>
+                            <div class="c-menu-item__title"><span>Flights</span></div>
+                        </div>
+                    </li>
+                    <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Modules">
+                        <div class="c-menu__item__inner">
+                            <i class="fa fa-puzzle-piece"></i>
+                            <div class="c-menu-item__title"><span>Modules</span></div>
+                            <div class="c-menu-item__expand js-expand-submenu"><i class="fa fa-angle-down"></i></div>
+                        </div>
+                        <ul class="c-menu__submenu u-list">
+                            <li>Payments</li>
+                            <li>Maps</li>
+                            <li>Notifications</li>
+                        </ul>
+                    </li>
+                    <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Statistics">
+                        <div class="c-menu__item__inner">
+                            <i class="far fa-chart-bar"></i>
+                            <div class="c-menu-item__title"><span>Statistics</span></div>
+                        </div>
+                    </li>
+                    <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
+                        <div class="c-menu__item__inner">
+                            <i class="fa fa-gift"></i>
+                            <div class="c-menu-item__title"><span>Gifts</span></div>
+                        </div>
+                    </li>
+                    <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Settings">
+                        <div class="c-menu__item__inner">
+                            <i class="fa fa-cogs"></i>
+                            <div class="c-menu-item__title"><span>Settings</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+
+<main class="l-main">
+    <div class="content-wrapper content-wrapper--with-bg">
+        <h1 class="page-title">Dashboard</h1>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Login.js" asp-append-version="true"></script>
+    <script src="~/js/setting.js" asp-append-version="true"></script>
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</main>
+</html>

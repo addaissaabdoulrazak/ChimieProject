@@ -1,0 +1,109 @@
+﻿@model ChimieProject.Models.Entities.Structure;
+@Html.AntiForgeryToken()
+<div class="pen-title"></div>
+    <partial name="_Notification">
+    <div class="border container" style="padding:30px;">
+        <form method="post" asp-action="Create" asp-controller="EchangeLot">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+            <div class="row pb-2">
+                <h2 class="text-primary">Create</h2>
+                <hr />
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Nom" class="col-sm-2 col-form-label mt-4"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Nom" class="form-control" type="text" />
+                    <span asp-validation-for="Nom" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+              <label asp-for="Type" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                 <select asp-for="Type" class="form-select" aria-label="Default select example">
+                    <option selected> Indiquer la structure </option>
+                    <option value="Departement" class="form-control">Departement</option>
+                    <option value="Laboratoire" class="form-control">Laboratoire</option>
+                 </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Responsable" class="col-sm-2 col-form-label">Respon.</label>
+             <div class="col-sm-10">      
+                <select asp-for="Responsable" class="form-select" aria-label="Default select example">
+                    <option selected>Designer le Responsable</option>
+                    <option value="manager" class="form-control">manager</option>
+                    <option value="Chimiste" class="form-control">Chimiste</option>
+                </select>
+                <span asp-validation-for="Responsable" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="row mb-3">
+              <label asp-for="Etablissement" class="col-sm-2 col-form-label mt-4">Ets</label>
+                <div class="col-sm-10">
+                <select asp-for="Etablissement" class="form-select" aria-label="Default select example">
+                    <option selected>choisissez un Etablissement</option>
+                    <option value="Université de Tunis" class="form-control">Université de Tunis</option>
+                    <option value="Université de Monastir" class="form-control">Université de Monastir</option>
+                    <option value="Université de Gabès" class="form-control">Université de Gabès</option>
+                    <option value="Université de Sousse" class="form-control">Université de Sousse</option>
+                    <option value="Université de Jendouba" class="form-control">Université de Jendouba</option>
+                    <option value="Université de Carthage" class="form-control">Université de Carthage</option>
+                    <option value="Université de Sfax" class="form-control">Université de Sfax</option>
+                    <option value="Université de Gafsa" class="form-control">Université de Gafsa</option>
+                </select>
+                <span asp-validation-for="Etablissement" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+            <label asp-for="Email" class="col-sm-2 col-form-label mt-4"></label>
+                <div class="col-sm-10">    
+                <input asp-for="Email" class="form-control" type="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                  <label asp-for="Acronyme" class="col-sm-2 col-form-label"></label>               
+                <div class="col-sm-10">
+                   <input asp-for="Acronyme" class="form-control" />
+                  <span asp-validation-for="Acronyme" class="text-danger"></span>
+                </div>
+            </div>  
+            <div class="row mb-3">
+              <label asp-for="Tel" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+              <input asp-for="Tel" class="form-control" type="tel" />
+              <span asp-validation-for="Tel" class="text-danger"></span>
+                </div>
+            </div>
+           @* <div class="row mb-3">
+                <label asp-for="Type" class="col-sm-2 col-form-label mt-4"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            </div>*@
+            <div class="row mb-3">
+                <label asp-for="Role" class="col-sm-2 col-form-label">Role</label>
+             <div class="col-sm-10">      
+                <select asp-for="Role" class="form-select" aria-label="Default select example">
+                    <option selected>Selectionnez un fonction</option>
+                        <option value="ADMISTRATOR" class="form-control">ADMISTRATOR</option>
+                    <option value="USER" class="form-control">USER</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+           </div>
+
+            <div class="row mb-3">
+             <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">      
+              <input asp-for="Password" class="form-control" type="password" />
+              <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+

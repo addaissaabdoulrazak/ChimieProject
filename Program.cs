@@ -91,6 +91,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Laboratoire}/{action=Inscription}/{id?}");
+    pattern: "{controller=Structure}/{action=Inscription}/{id?}");
 
 app.Run();

@@ -3,7 +3,7 @@
     Layout = "_Admin";
 }
 
-@model IEnumerable<ChimieProject.Models.Entities.Laboratoire>
+@model IEnumerable<ChimieProject.Models.Entities.Structure>
 <br />
 <div class="container row p-0 m-0">
     <div class="col-6">
@@ -52,7 +52,7 @@
                                 </div>
                             </td>
                         }
-                        else
+                        else if(obj.Role=="Admin")
                         {
                             <td width="20%" class="text-success">
                                 <strong>Actif</strong>
@@ -60,11 +60,21 @@
 
                             <td width="50">
                                 <div class="w-75 btn-group" role="group">
-                                    <a  class="text-success" onclick=lock(@obj.Id)>
+                                   <p> Adminstrator</p>
+                                </div>
+                            </td>
+                        }else{
+                            <td width="20%" class="text-success">
+                                <strong>Actif</strong>
+                            </td>
+
+                            <td width="50">
+                                <div class="w-75 btn-group" role="group">
+                                    <a class="text-success" onclick=lock(@obj.Id)>
                                         <i class="fa-solid fa-lock fa-3x"></i>
                                         lock
                                     </a>
-                                    <a  class="text-danger" onclick="return unlock(@(obj.Id))">
+                                    <a class="text-danger" onclick="return unlock(@(obj.Id))">
                                         <i class="fa-solid fa-lock-open fa-3x"></i>
                                         unlock
                                     </a>
@@ -121,7 +131,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "/Laboratoire/Decline",
+                        url: "/Structure/Decline",
                         data:{id:id},
                         success: function (data) {
                             if (data.success) {
@@ -152,7 +162,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/Laboratoire/Accept",
+                        url: "/Structure/Accept",
                         data: { id: id },
                         success: function (data) {
                             if (data.success) {

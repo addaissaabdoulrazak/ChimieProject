@@ -27,6 +27,7 @@
                 <tr>
                     <th>Nom Laboratoire</th>
                     <th>Nom Produit</th>
+                    <th>Type Echange</th>
                     <th>DatePublication</th>
                     <th>Purete</th>
                     <th>Concentration</th>
@@ -40,7 +41,7 @@
                 @foreach (var obj in Model)
                 {
                     {
-                        Laboratoire LaboObject = BLL_Laboratoire.Get(obj.IdLabo);
+                        Structure LaboObject = BLL_Structure.Get(obj.IdLabo);
                         Produit prodObject = BLLProduit.Get(obj.IdProduit);
                   
                   
@@ -51,6 +52,9 @@
                         </td>
                         <td width="30%">
                                 @prodObject.Nom
+                        </td>
+                         <td width="30%">
+                          @obj.Type
                         </td>
                      
                         <td width="30%">
@@ -147,6 +151,5 @@
                 })
             }
          </script>
-
  }
 

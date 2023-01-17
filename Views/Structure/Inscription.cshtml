@@ -1,4 +1,4 @@
-﻿@model ChimieProject.Models.Entities.LaboratoireDto;
+﻿@model ChimieProject.Models.Entities.StructureDto;
 @{
     ViewData["Title"] = "Login";
     Layout = "_Layout";
@@ -27,7 +27,7 @@
             <div class="form">
 
                 <h2>Login to your account</h2>
-                <form asp-action="Login" asp-controller="Laboratoire">
+                <form asp-action="Login" asp-controller="Structure">
                     <div>
                         <label asp-for="Nom" class="col-sm-2 col-form-label"></label>
                         <input asp-for="Nom" class="form-control" placeholder="Nom" />
@@ -47,7 +47,7 @@
             </div>
             <div class="form">
                 <h2>Create an account</h2>
-                <form asp-action="Inscription" asp-controller="Laboratoire" method="post">
+                <form asp-action="Inscription" asp-controller="Structure" method="post">
 
                     <div class="mb-1">
                         <label asp-for="Nom" class="col-sm-2 col-form-label"></label>
@@ -61,7 +61,16 @@
                         <input asp-for="Acronyme" class="form-control" />
                         <span asp-validation-for="Acronyme" class="text-danger"></span>
                     </div>
-
+                    
+                    <div class="mb-1">
+                        <label asp-for="Type" class="col-sm-2 col-form-label"></label>
+                        <select asp-for="Type" class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="Departement" class="form-control">Departement</option>
+                            <option value="Laboratoire" class="form-control">Laboratoire</option>
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
 
                     <div class="mb-1">
                         <label asp-for="Responsable" class="col-sm-2 col-form-label"></label>

@@ -1,4 +1,5 @@
-﻿using ChimieProject.Models.BLL;
+﻿using ChimieProject.Models;
+using ChimieProject.Models.BLL;
 using ChimieProject.Models.Entities;
 using ChimieProject.Models.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -6,14 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChimieProject.Controllers
 {
-    public class LaboratoireController : Controller
+    public class StructureController : Controller
     {
         private readonly IConfiguration _configuration;
 
         private readonly IJwtAuthenticationService _jwtAuthenticationService;
 
+        //Use DataBinding
+        [BindProperty]
+        public Structure Structure { get; set; }
+
         //My controller
-        public LaboratoireController(IConfiguration configuration, IJwtAuthenticationService jwtAuthenticationService)
+        public StructureController(IConfiguration configuration, IJwtAuthenticationService jwtAuthenticationService)
         {
             _configuration = configuration;
 
@@ -35,10 +40,11 @@ namespace ChimieProject.Controllers
             {
                 return (RedirectToAction("Index", "Home"));
             }
-            IEnumerable<Laboratoire> _listofLab = BLL_Laboratoire.GetAll();
+            IEnumerable<Structure> _listofLab = BLL_Structure.GetAll();
             return View(_listofLab);
         }
 
+//-------------------------------------------------[Register]---------------------------------------------------------
 
         [HttpGet]
         public IActionResult Inscription()
@@ -46,10 +52,11 @@ namespace ChimieProject.Controllers
             return View();
         }
 
+
         [HttpPost]
-        public IActionResult Inscription(LaboratoireDto request)
+        public IActionResult Inscription(StructureDto request)
         {
-            Laboratoire IsObjectEmailExist = BLL_Laboratoire.GetElementByEmail(request.Email);
+            Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
             if (IsObjectEmailExist != null)
             {
@@ -58,37 +65,38 @@ namespace ChimieProject.Controllers
 
             if (ModelState.IsValid)
             {
-                Laboratoire _lab = new Laboratoire();
+                Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
 
-                _lab.Nom = request.Nom;
-                _lab.Email = request.Email;
-                _lab.Acronyme = request.Acronyme;
-                _lab.Password = EncryptedPassword;
-                _lab.Statut = 0;
-                _lab.Responsable = request.Responsable;
-                _lab.Tel = request.Tel;
-                _lab.Etablissement = request.Etablissement;
-                _lab.Role = "user";
+                _Struc.Nom = request.Nom;
+                _Struc.Type=request.Type;
+                _Struc.Email = request.Email;
+                _Struc.Acronyme = request.Acronyme;
+                _Struc.Password = EncryptedPassword;
+                _Struc.Statut = 0;
+                _Struc.Responsable = request.Responsable;
+                _Struc.Tel = request.Tel;
+                _Struc.Etablissement = request.Etablissement;
+                _Struc.Role = Roles.USER.ToString();
 
-                BLL_Laboratoire.Insert(_lab);
+                BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
             }
 
             return View(request);
-          
+
         }
+//-------------------------------------------------[End Register]---------------------------------------------------------
 
 
-
-        //----------[Create a Login Action After <ith Token]-------------------//
+      //----------[Create a Login Action After <ith Token]-------------------//
 
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LaboratoireDto request)
+        public IActionResult Login(StructureDto request)
         {
 
             if (string.IsNullOrEmpty(request.Nom) || string.IsNullOrEmpty(request.Password))
@@ -98,7 +106,7 @@ namespace ChimieProject.Controllers
 
             // _ = Unauthorized();
 
-            Laboratoire objLab = _jwtAuthenticationService.Authenticate(request.Nom);
+            Structure objLab = _jwtAuthenticationService.Authenticate(request.Nom);
 
 
 
@@ -107,7 +115,8 @@ namespace ChimieProject.Controllers
                 //Decrypt PasswordHash
                 string DecryptedPassword = _jwtAuthenticationService.Decrypt(objLab.Password);
 
-                if (DecryptedPassword == request.Password && objLab.Nom == request.Nom && objLab.Role=="Admin")// added email
+                if (DecryptedPassword == request.Password && objLab.Nom == request.Nom && objLab.Role==Roles.ADMISTRATOR.ToString())
+                    // added email
                 {
                     //string Token = _jwtAuthenticationService.CreateToken(user);
                     string Token = _jwtAuthenticationService.BuildToken(_configuration.GetSection("Jwt:Key").Value.ToString(), _configuration.GetSection("Jwt:Issuer").Value.ToString(), objLab);
@@ -145,6 +154,64 @@ namespace ChimieProject.Controllers
             return View();
         }
 
+
+
+
+        //----------------------------------[Setting Management User]--------------------------------------//
+
+        [Authorize]
+        [Route("SettingManagement")]
+        [HttpGet]
+        public IActionResult SettingManagement()
+        {
+          
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Upsert(long? id)
+        {
+            
+            if (id == null)
+            {
+                //create
+                return View();
+            }
+            //update
+            Structure objStructure= BLL_Structure.Get((long)id);
+            if (objStructure == null)
+            {
+                return NotFound();
+            }
+            return View(objStructure);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert()
+        {
+            if (ModelState.IsValid)
+            {
+                if (Structure.Id == 0)
+                {
+                    //create
+                    BLL_Structure.Insert(Structure);
+                }
+                else
+                {
+                    BLL_Structure.Update(Structure);
+                }
+                
+                return RedirectToAction("SettingManagement");
+            }
+            return View(Structure);
+        }
+
+        //-------------------------------------[End]--------------------------------------//
+
+
         [HttpGet]
         public IActionResult LogOut()
         {
@@ -158,7 +225,7 @@ namespace ChimieProject.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = BLL_Laboratoire.GetAll() });
+            return Json(new { data = BLL_Structure.GetAll() });
         }
 
 
@@ -166,7 +233,7 @@ namespace ChimieProject.Controllers
         [HttpDelete]
         public IActionResult Decline(int id)
         {
-            var LabFromDb = BLL_Laboratoire.Get(id);
+            var LabFromDb = BLL_Structure.Get(id);
 
             if (LabFromDb == null)
             {
@@ -174,7 +241,7 @@ namespace ChimieProject.Controllers
             }
 
 
-            BLL_Laboratoire.Delete(id);
+            BLL_Structure.Delete(id);
 
             return Json(new { success = true, message = "Decline successful" });
         }
@@ -184,7 +251,7 @@ namespace ChimieProject.Controllers
         [HttpPost]
         public IActionResult Accept(int id)
         {
-            var LabFromDb = BLL_Laboratoire.Get(id);
+            var LabFromDb = BLL_Structure.Get(id);
             if (LabFromDb == null)
             {
                 return Json(new { success = false, message = "Error" });
@@ -192,7 +259,7 @@ namespace ChimieProject.Controllers
 
             LabFromDb.Statut = 1;
 
-            BLL_Laboratoire.Update(LabFromDb);
+            BLL_Structure.Update(LabFromDb);
 
             return Json(new { success = true, message = "accepted" });
         }

@@ -9,9 +9,11 @@ using System.Xml.Linq;
 
 namespace ChimieProject.Models.Entities
 {
-    public class LaboratoireDto
+    public class StructureDto
     {
         public string Acronyme { get; set; }
+
+
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "The email address is required")]
@@ -27,6 +29,11 @@ namespace ChimieProject.Models.Entities
         [Required]
         [Display(Name = "Nom")]
         public string Nom { get; set; }
+
+        [Required]
+        [Display(Name = "Type Echange")]
+        public string Type { get; set; }
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
@@ -45,7 +52,7 @@ namespace ChimieProject.Models.Entities
 
 
 
-        public LaboratoireDto() { }
+        public StructureDto() { }
 
    
     }

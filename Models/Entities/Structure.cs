@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace ChimieProject.Models.Entities
 {
-    public class Laboratoire
+    public class Structure
     {
         public string Acronyme { get; set; }
 
@@ -18,6 +18,9 @@ namespace ChimieProject.Models.Entities
         public long Id { get; set; }
 
         public string Nom { get; set; }
+
+        public string Type { get; set; }
+
         public string Password { get; set; }
 
         public string Responsable { get; set; }
@@ -28,20 +31,21 @@ namespace ChimieProject.Models.Entities
 
         public string Role { get; set; }
 
-        public Laboratoire() { }
+        public Structure() { }
 
-        public Laboratoire(DataRow dataRow)
+        public Structure(DataRow dataRow)
         {
             Acronyme = Convert.ToString(dataRow["Acronyme"]);
+            Type = Convert.ToString(dataRow["Type"]);
             Email = Convert.ToString(dataRow["Email"]);
             Etablissement = Convert.ToString(dataRow["Etablissement"]);
             Id = Convert.ToInt64(dataRow["Id"]);
             Statut = Convert.ToInt32(dataRow["Statut"]);
             Role = Convert.ToString(dataRow["Role"]);
-            Nom = Convert.ToString(dataRow["Nom "]);
-            Password = Convert.ToString(dataRow["Password "]);
-            Responsable = Convert.ToString(dataRow["Responsable "]);
-            Tel = Convert.ToString(dataRow["Tel "]);
+            Nom = Convert.ToString(dataRow["Nom"]);
+            Password = Convert.ToString(dataRow["Password"]);
+            Responsable = Convert.ToString(dataRow["Responsable"]);
+            Tel = Convert.ToString(dataRow["Tel"]);
         }
     }
 }

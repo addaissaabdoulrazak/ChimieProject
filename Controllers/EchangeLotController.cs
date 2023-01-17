@@ -20,7 +20,7 @@ namespace ChimieProject.Controllers
 
             ViewBag.objProduitList = BLLProduit.GetAll();
 
-            ViewBag.objLaboratoireList = BLL_Laboratoire.GetAll();
+            ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
             return View();
         }
@@ -32,7 +32,7 @@ namespace ChimieProject.Controllers
         {
             ViewBag.objProduitList = BLLProduit.GetAll();
 
-            ViewBag.objLaboratoireList = BLL_Laboratoire.GetAll();
+            ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
             if (ModelState.IsValid)
             {
@@ -49,7 +49,7 @@ namespace ChimieProject.Controllers
         {
             ViewBag.objProduitList = BLLProduit.GetAll();
 
-            ViewBag.objLaboratoireList = BLL_Laboratoire.GetAll();
+            ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
             if (id == 0)
             {
@@ -72,7 +72,7 @@ namespace ChimieProject.Controllers
         {
             ViewBag.objProduitList = BLLProduit.GetAll();
 
-            ViewBag.objLaboratoireList = BLL_Laboratoire.GetAll();
+            ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
             if (ModelState.IsValid)
             {

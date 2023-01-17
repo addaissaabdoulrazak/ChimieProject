@@ -62,7 +62,7 @@ namespace ChimieProject.Models.DAL
                     sqlConnection.Open();
                     var sqlTransaction = sqlConnection.BeginTransaction();
 
-                    string query = "INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Purete],[Quantite],[UniteQuantite])  VALUES (@Concentration,@DatePeremption,@DatePublication,@IdLabo,@IdProduit,@Purete,@Quantite,@UniteQuantite); ";
+                    string query = "INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Type],[Purete],[Quantite],[UniteQuantite])  VALUES (@Concentration,@DatePeremption,@DatePublication,@IdLabo,@IdProduit,@Type,@Purete,@Quantite,@UniteQuantite); ";
                     query += "SELECT SCOPE_IDENTITY();";
 
                     using (var sqlCommand = new SqlCommand(query, sqlConnection, sqlTransaction))
@@ -73,6 +73,7 @@ namespace ChimieProject.Models.DAL
                         sqlCommand.Parameters.AddWithValue("DatePublication", item.DatePublication);
                         sqlCommand.Parameters.AddWithValue("IdLabo", item.IdLabo);
                         sqlCommand.Parameters.AddWithValue("IdProduit", item.IdProduit);
+                        sqlCommand.Parameters.AddWithValue("Type", item.Type);
                         sqlCommand.Parameters.AddWithValue("Purete", item.Purete);
                         sqlCommand.Parameters.AddWithValue("Quantite", item.Quantite);
                         sqlCommand.Parameters.AddWithValue("UniteQuantite", item.UniteQuantite);
@@ -101,13 +102,14 @@ namespace ChimieProject.Models.DAL
                         foreach (var item in items)
                         {
                             i++;
-                            query += " INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Purete],[Quantite],[UniteQuantite]) VALUES ( "
+                            query += " INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Type],[Purete],[Quantite],[UniteQuantite]) VALUES ( "
 
                                 + "@Concentration" + i + ","
                                 + "@DatePeremption" + i + ","
                                 + "@DatePublication" + i + ","
                                 + "@IdLabo" + i + ","
                                 + "@IdProduit" + i + ","
+                                + "@Type" + i + ","
                                 + "@Purete" + i + ","
                                 + "@Quantite" + i + ","
                                 + "@UniteQuantite" + i
@@ -119,6 +121,7 @@ namespace ChimieProject.Models.DAL
                             sqlCommand.Parameters.AddWithValue("DatePublication" + i, item.DatePublication);
                             sqlCommand.Parameters.AddWithValue("IdLabo" + i, item.IdLabo);
                             sqlCommand.Parameters.AddWithValue("IdProduit" + i, item.IdProduit);
+                            sqlCommand.Parameters.AddWithValue("Type" + i, item.Type);
                             sqlCommand.Parameters.AddWithValue("Purete" + i, item.Purete);
                             sqlCommand.Parameters.AddWithValue("Quantite" + i, item.Quantite);
                             sqlCommand.Parameters.AddWithValue("UniteQuantite" + i, item.UniteQuantite);
@@ -141,7 +144,7 @@ namespace ChimieProject.Models.DAL
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
                 {
                     sqlConnection.Open();
-                    string query = "UPDATE [EchangeLot] SET [Concentration]=@Concentration, [DatePeremption]=@DatePeremption, [DatePublication]=@DatePublication, [IdLabo]=@IdLabo, [IdProduit]=@IdProduit, [Purete]=@Purete, [Quantite]=@Quantite, [UniteQuantite]=@UniteQuantite WHERE [Id]=@Id";
+                    string query = "UPDATE [EchangeLot] SET [Concentration]=@Concentration, [DatePeremption]=@DatePeremption, [DatePublication]=@DatePublication, [IdLabo]=@IdLabo, [IdProduit]=@IdProduit,[Type]=@Type, [Purete]=@Purete, [Quantite]=@Quantite, [UniteQuantite]=@UniteQuantite WHERE [Id]=@Id";
                     var sqlCommand = new SqlCommand(query, sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("Id", item.Id);
@@ -150,6 +153,7 @@ namespace ChimieProject.Models.DAL
                     sqlCommand.Parameters.AddWithValue("DatePublication", item.DatePublication);
                     sqlCommand.Parameters.AddWithValue("IdLabo", item.IdLabo);
                     sqlCommand.Parameters.AddWithValue("IdProduit", item.IdProduit);
+                    sqlCommand.Parameters.AddWithValue("Type", item.Type);
                     sqlCommand.Parameters.AddWithValue("Purete", item.Purete);
                     sqlCommand.Parameters.AddWithValue("Quantite", item.Quantite);
                     sqlCommand.Parameters.AddWithValue("UniteQuantite", item.UniteQuantite);
@@ -182,6 +186,7 @@ namespace ChimieProject.Models.DAL
                                 + "[DatePublication]=@DatePublication" + i + ","
                                 + "[IdLabo]=@IdLabo" + i + ","
                                 + "[IdProduit]=@IdProduit" + i + ","
+                                + "[Type]=@Type" + i + ","
                                 + "[Purete]=@Purete" + i + ","
                                 + "[Quantite]=@Quantite" + i + ","
                                 + "[UniteQuantite]=@UniteQuantite" + i + " WHERE [Id]=@Id" + i
@@ -193,6 +198,7 @@ namespace ChimieProject.Models.DAL
                             sqlCommand.Parameters.AddWithValue("DatePublication" + i, item.DatePublication);
                             sqlCommand.Parameters.AddWithValue("IdLabo" + i, item.IdLabo);
                             sqlCommand.Parameters.AddWithValue("IdProduit" + i, item.IdProduit);
+                            sqlCommand.Parameters.AddWithValue("Type" + i, item.Type);
                             sqlCommand.Parameters.AddWithValue("Purete" + i, item.Purete);
                             sqlCommand.Parameters.AddWithValue("Quantite" + i, item.Quantite);
                             sqlCommand.Parameters.AddWithValue("UniteQuantite" + i, item.UniteQuantite);

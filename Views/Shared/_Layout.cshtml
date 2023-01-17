@@ -14,6 +14,10 @@
     @*--Toastr js--*@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
     @*--Toastr js--*@
+    @*--Datatable--*@
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" asp-append-version="true" />
+    @*--Datatable--*@
+  
 </head>
 <body>
     <header>
@@ -49,6 +53,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/Login.js" asp-append-version="true"></script>
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

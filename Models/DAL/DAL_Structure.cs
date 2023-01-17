@@ -5,16 +5,16 @@ using System.Data.SqlClient;
 namespace ChimieProject.Models.DAL
 {
 
-    public class DAL_Laboratoire
+    public class DAL_Structure
     {
         #region Default Methods
-        public static Laboratoire Get(long id)
+        public static Structure Get(long id)
         {
             var dataTable = new DataTable();
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
-                string query = "SELECT * FROM [Laboratoire] WHERE [Id]=@Id";
+                string query = "SELECT * FROM [Structure] WHERE [Id]=@Id";
                 var sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("Id", id);
 
@@ -24,7 +24,7 @@ namespace ChimieProject.Models.DAL
 
             if (dataTable.Rows.Count > 0)
             {
-                return new Laboratoire(dataTable.Rows[0]);
+                return new Structure(dataTable.Rows[0]);
             }
             else
             {
@@ -34,13 +34,13 @@ namespace ChimieProject.Models.DAL
 
 
         //Get Element by name
-        public static Laboratoire GetElementByName(string nom)
+        public static Structure GetElementByName(string nom)
         {
             var dataTable = new DataTable();
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
-                string query = "SELECT * FROM [Laboratoire] WHERE [Nom]=@nom";
+                string query = "SELECT * FROM [Structure] WHERE [Nom]=@nom";
                 var sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("Nom", nom);
 
@@ -50,7 +50,7 @@ namespace ChimieProject.Models.DAL
 
             if (dataTable.Rows.Count > 0)
             {
-                return new Laboratoire(dataTable.Rows[0]);
+                return new Structure(dataTable.Rows[0]);
             }
             else
             {
@@ -61,13 +61,13 @@ namespace ChimieProject.Models.DAL
 
 
         //Get Element by Email
-        public static Laboratoire GetElementByEmail(string Email)
+        public static Structure GetElementByEmail(string Email)
         {
             var dataTable = new DataTable();
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
-                string query = "SELECT * FROM [Laboratoire] WHERE [Email]=@Email";
+                string query = "SELECT * FROM [Structure] WHERE [Email]=@Email";
                 var sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("Email", Email);
 
@@ -77,7 +77,7 @@ namespace ChimieProject.Models.DAL
 
             if (dataTable.Rows.Count > 0)
             {
-                return new Laboratoire(dataTable.Rows[0]);
+                return new Structure(dataTable.Rows[0]);
             }
             else
             {
@@ -88,13 +88,13 @@ namespace ChimieProject.Models.DAL
 
 
 
-        public static List<Laboratoire> Get()
+        public static List<Structure> Get()
         {
             var dataTable = new DataTable();
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
-                string query = "SELECT * FROM [Laboratoire]";
+                string query = "SELECT * FROM [Structure]";
                 var sqlCommand = new SqlCommand(query, sqlConnection);
 
                 new SqlDataAdapter(sqlCommand).Fill(dataTable);
@@ -102,15 +102,15 @@ namespace ChimieProject.Models.DAL
 
             if (dataTable.Rows.Count > 0)
             {
-                return dataTable.Rows.Cast<DataRow>().Select(x => new Laboratoire(x)).ToList();
+                return dataTable.Rows.Cast<DataRow>().Select(x => new Structure(x)).ToList();
             }
             else
             {
-                return new List<Laboratoire>();
+                return new List<Structure>();
             }
         }
 
-        private static List<Laboratoire> get(List<long> ids)
+        private static List<Structure> get(List<long> ids)
         {
             if (ids != null && ids.Count > 0)
             {
@@ -129,23 +129,23 @@ namespace ChimieProject.Models.DAL
                     }
                     queryIds = queryIds.TrimEnd(',');
 
-                    sqlCommand.CommandText = $"SELECT * FROM [Laboratoire] WHERE [Id] IN ({queryIds})";
+                    sqlCommand.CommandText = $"SELECT * FROM [Structure] WHERE [Id] IN ({queryIds})";
                     new SqlDataAdapter(sqlCommand).Fill(dataTable);
                 }
 
                 if (dataTable.Rows.Count > 0)
                 {
-                    return dataTable.Rows.Cast<DataRow>().Select(x => new Laboratoire(x)).ToList();
+                    return dataTable.Rows.Cast<DataRow>().Select(x => new Structure(x)).ToList();
                 }
                 else
                 {
-                    return new List<Laboratoire>();
+                    return new List<Structure>();
                 }
             }
-            return new List<Laboratoire>();
+            return new List<Structure>();
         }
 
-        public static int Insert(Laboratoire item)
+        public static int Insert(Structure item)
         {
             int response = int.MinValue;
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
@@ -154,13 +154,14 @@ namespace ChimieProject.Models.DAL
                 var sqlTransaction = sqlConnection.BeginTransaction();
 
                 //testez voir
-                string query = "INSERT INTO [Laboratoire] ([Acronyme],[Email],[Etablissement],[Nom],[Password],[Responsable],[Tel],[Role],[Statut])  VALUES (@Acronyme,@Email,@Etablissement,@Nom,@Password,@Responsable,@Tel,@Role,@Statut); ";
+                string query = "INSERT INTO [Structure] ([Acronyme],[Type],[Email],[Etablissement],[Nom],[Password],[Responsable],[Tel],[Role],[Statut])  VALUES (@Acronyme,@Type,@Email,@Etablissement,@Nom,@Password,@Responsable,@Tel,@Role,@Statut); ";
                 query += "SELECT SCOPE_IDENTITY();";
 
                 using (var sqlCommand = new SqlCommand(query, sqlConnection, sqlTransaction))
                 {
 
                     sqlCommand.Parameters.AddWithValue("Acronyme", item.Acronyme ?? (object)DBNull.Value);
+                    sqlCommand.Parameters.AddWithValue("Type", item.Type ?? (object)DBNull.Value);
                     sqlCommand.Parameters.AddWithValue("Email", item.Email ?? (object)DBNull.Value);
                     sqlCommand.Parameters.AddWithValue("Etablissement", item.Etablissement ?? (object)DBNull.Value );
                     sqlCommand.Parameters.AddWithValue("Nom", item.Nom ?? (object)DBNull.Value);
@@ -179,7 +180,7 @@ namespace ChimieProject.Models.DAL
                 return response;
             }
         }
-        private static int insert(List<Laboratoire> items)
+        private static int insert(List<Structure> items)
         {
             if (items != null && items.Count > 0)
             {
@@ -194,9 +195,10 @@ namespace ChimieProject.Models.DAL
                     foreach (var item in items)
                     {
                         i++;
-                        query += " INSERT INTO [Laboratoire] ([Acronyme],[Email],[Etablissement],[Nom],[Password],[Responsable],[Tel],[Role],[Statut]) VALUES ( "
+                        query += " INSERT INTO [Structure] ([Acronyme],[Type],[Email],[Etablissement],[Nom],[Password],[Responsable],[Tel],[Role],[Statut]) VALUES ( "
 
                             + "@Acronyme" + i + ","
+                            + "@Type" + i + ","
                             + "@Email" + i + ","
                             + "@Etablissement" + i + ","
                             + "@Nom" + i + ","
@@ -210,6 +212,7 @@ namespace ChimieProject.Models.DAL
 
 
                         sqlCommand.Parameters.AddWithValue("Acronyme" + i, item.Acronyme);
+                        sqlCommand.Parameters.AddWithValue("Type" + i, item.Type);
                         sqlCommand.Parameters.AddWithValue("Email" + i, item.Email);
                         sqlCommand.Parameters.AddWithValue("Etablissement" + i, item.Etablissement);
                         sqlCommand.Parameters.AddWithValue("Nom" + i, item.Nom);
@@ -232,17 +235,18 @@ namespace ChimieProject.Models.DAL
             return -1;
         }
 
-        public static int Update(Laboratoire item)
+        public static int Update(Structure item)
         {
             int results = -1;
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
-                string query = "UPDATE [Laboratoire] SET [Acronyme]=@Acronyme, [Email]=@Email, [Etablissement]=@Etablissement, [Nom]=@Nom, [Password]=@Password, [Responsable]=@Responsable, [Tel]=@Tel,[Role]=@Role,[Statut]=@Statut WHERE [Id]=@Id";
+                string query = "UPDATE [Structure] SET [Acronyme]=@Acronyme,[Type]=@Type,[Email]=@Email, [Etablissement]=@Etablissement, [Nom]=@Nom, [Password]=@Password, [Responsable]=@Responsable, [Tel]=@Tel,[Role]=@Role,[Statut]=@Statut WHERE [Id]=@Id";
                 var sqlCommand = new SqlCommand(query, sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("Id", item.Id);
                 sqlCommand.Parameters.AddWithValue("Acronyme", item.Acronyme);
+                sqlCommand.Parameters.AddWithValue("Type", item.Type);
                 sqlCommand.Parameters.AddWithValue("Email", item.Email);
                 sqlCommand.Parameters.AddWithValue("Etablissement", item.Etablissement);
                 sqlCommand.Parameters.AddWithValue("Nom", item.Nom);
@@ -259,7 +263,7 @@ namespace ChimieProject.Models.DAL
             return results;
         }
 
-        private static int update(List<Laboratoire> items)
+        private static int update(List<Structure> items)
         {
             if (items != null && items.Count > 0)
             {
@@ -274,9 +278,10 @@ namespace ChimieProject.Models.DAL
                     foreach (var item in items)
                     {
                         i++;
-                        query += " UPDATE [Laboratoire] SET "
+                        query += " UPDATE [Structure] SET "
 
                             + "[Acronyme]=@Acronyme" + i + ","
+                             + "[Type]=@Type" + i + ","
                             + "[Email]=@Email" + i + ","
                             + "[Etablissement]=@Etablissement" + i + ","
                             + "[Nom]=@Nom" + i + ","
@@ -289,6 +294,7 @@ namespace ChimieProject.Models.DAL
 
                         sqlCommand.Parameters.AddWithValue("Id" + i, item.Id);
                         sqlCommand.Parameters.AddWithValue("Acronyme" + i, item.Acronyme);
+                        sqlCommand.Parameters.AddWithValue("Type" + i, item.Type);
                         sqlCommand.Parameters.AddWithValue("Email" + i, item.Email);
                         sqlCommand.Parameters.AddWithValue("Etablissement" + i, item.Etablissement);
                         sqlCommand.Parameters.AddWithValue("Nom" + i, item.Nom);
@@ -317,7 +323,7 @@ namespace ChimieProject.Models.DAL
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
-                string query = "DELETE FROM [Laboratoire] WHERE [Id]=@Id";
+                string query = "DELETE FROM [Structure] WHERE [Id]=@Id";
                 var sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("Id", id);
 
