@@ -58,12 +58,17 @@ namespace ChimieProject.Controllers
         {
             Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
-            if (IsObjectEmailExist != null)
-            {
-                ModelState.AddModelError("Email", "Email already exists");
-            }
+            //if (IsObjectEmailExist != null)
+            //{
+            //    ModelState.AddModelError("Email", "Email already exists");
+            //}
 
+<<<<<<< Updated upstream
 
+=======
+            //if (ModelState.IsValid)
+            //{
+>>>>>>> Stashed changes
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
@@ -82,7 +87,13 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
+<<<<<<< Updated upstream
 
+=======
+            //}
+
+            //return View(request);
+>>>>>>> Stashed changes
 
         }
 //-------------------------------------------------[End Register]---------------------------------------------------------
