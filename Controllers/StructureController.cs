@@ -63,8 +63,7 @@ namespace ChimieProject.Controllers
                 ModelState.AddModelError("Email", "Email already exists");
             }
 
-            if (ModelState.IsValid)
-            {
+
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
@@ -83,9 +82,7 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
-            }
 
-            return View(request);
 
         }
 //-------------------------------------------------[End Register]---------------------------------------------------------

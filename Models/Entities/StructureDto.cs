@@ -31,7 +31,7 @@ namespace ChimieProject.Models.Entities
         public string Nom { get; set; }
 
         [Required]
-        [Display(Name = "Type Echange")]
+        [Display(Name = "Type Structure")]
         public string Type { get; set; }
 
 
