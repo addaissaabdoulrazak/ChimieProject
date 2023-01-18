@@ -1,5 +1,6 @@
 ﻿using ChimieProject.Models;
 using ChimieProject.Models.BLL;
+using ChimieProject.Models.DAL;
 using ChimieProject.Models.Entities;
 using ChimieProject.Models.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -49,6 +50,10 @@ namespace ChimieProject.Controllers
         [HttpGet]
         public IActionResult Inscription()
         {
+    //        Migration.CreationTableProduit();
+           Migration.CreationTableLaboratoire();
+            Migration.CreationTablePublication();
+           
             return View();
         }
 
@@ -56,15 +61,15 @@ namespace ChimieProject.Controllers
         [HttpPost]
         public IActionResult Inscription(StructureDto request)
         {
-            Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
+            
+            //Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
-            if (IsObjectEmailExist != null)
-            {
-                ModelState.AddModelError("Email", "Email already exists");
-            }
+            //if (IsObjectEmailExist != null)
+            //{
+            //    ModelState.AddModelError("Email", "Email already exists");
+            //}
 
-            if (ModelState.IsValid)
-            {
+    
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
@@ -83,9 +88,8 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
-            }
+     
 
-            return View(request);
 
         }
 //-------------------------------------------------[End Register]---------------------------------------------------------

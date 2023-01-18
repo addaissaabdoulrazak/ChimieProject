@@ -37,6 +37,7 @@ namespace ChimieProject.Models.DAL
                 var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
                 {
+                Migration.CreationTablePublication();
                     sqlConnection.Open();
                     string query = "SELECT * FROM [EchangeLot]";
                     var sqlCommand = new SqlCommand(query, sqlConnection);

@@ -6,14 +6,15 @@ namespace ChimieProject.Models.DAL
 {
     public class DAL_Produit
     {
-
-            #region Default Methods
-            public static Produit Get(long id)
+       
+        #region Default Methods
+        public static Produit Get(long id)
             {
                 var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
                 {
-                    sqlConnection.Open();
+                  
+                sqlConnection.Open();
                     string query = "SELECT * FROM [Produit] WHERE [Id]=@Id";
                     var sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("Id", id);
@@ -37,6 +38,7 @@ namespace ChimieProject.Models.DAL
                 var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
                 {
+                    Migration.CreationTableProduit();
                     sqlConnection.Open();
                     string query = "SELECT * FROM [Produit]";
                     var sqlCommand = new SqlCommand(query, sqlConnection);

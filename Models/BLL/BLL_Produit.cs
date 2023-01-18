@@ -3,7 +3,32 @@ using ChimieProject.Models.Entities;
 
 namespace ChimieProject.Models.BLL
 {
-    public class BLLProduit
+//    public class BLL_Produit
+//    {
+//public static Message Add(Produit produit)
+//        {
+//            return DAL_Produit.Add(produit);
+//        }
+//        public         static Message Update(Produit produit)
+//        {
+//            return DAL_Produit.Update(produit);
+//        }
+//        public static Message delete(int id)
+//        {
+//            return DAL_Produit.Delete(id);
+//        }
+
+//        public static Produit GetById(int Id)
+//        {
+//            return DAL_Produit.GetArticleById(Id);
+//        }
+//        public static List<Produit> GetAll()
+//        {
+//            return DAL_Produit.GetAllArticle();
+//        }
+//    }
+
+    public class BLL_Produit
     {
         public static Produit Get(long id)
         {
