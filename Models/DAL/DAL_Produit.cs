@@ -6,9 +6,7 @@ namespace ChimieProject.Models.DAL
 {
     public class DAL_Produit
     {
-<<<<<<< HEAD
-       
-=======
+
         public static void CreateTable()
         {
             try
@@ -23,7 +21,7 @@ namespace ChimieProject.Models.DAL
             }
             catch { }
         }
->>>>>>> 97292bfb69e98821620641cff5fba3441aebad50
+
         #region Default Methods
         public static Produit Get(long id)
             {
