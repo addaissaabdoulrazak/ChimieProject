@@ -18,7 +18,7 @@ namespace ChimieProject.Controllers
         public IActionResult Create()
         {
 
-            ViewBag.objProduitList = BLLProduit.GetAll();
+            ViewBag.objProduitList = BLL_Produit.GetAll();
 
             ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
@@ -30,7 +30,7 @@ namespace ChimieProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(EchangeLot request)
         {
-            ViewBag.objProduitList = BLLProduit.GetAll();
+            ViewBag.objProduitList = BLL_Produit.GetAll();
 
             ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
@@ -47,7 +47,7 @@ namespace ChimieProject.Controllers
         //GET
         public IActionResult Edit(long id)
         {
-            ViewBag.objProduitList = BLLProduit.GetAll();
+            ViewBag.objProduitList = BLL_Produit.GetAll();
 
             ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
@@ -70,7 +70,7 @@ namespace ChimieProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(EchangeLot obj)
         {
-            ViewBag.objProduitList = BLLProduit.GetAll();
+            ViewBag.objProduitList = BLL_Produit.GetAll();
 
             ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 

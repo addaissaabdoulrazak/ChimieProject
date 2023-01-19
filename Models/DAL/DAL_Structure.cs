@@ -84,15 +84,12 @@ namespace ChimieProject.Models.DAL
                 return null;
             }
         }
-
-
-
-
         public static List<Structure> Get()
         {
             var dataTable = new DataTable();
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
+               
                 sqlConnection.Open();
                 string query = "SELECT * FROM [Structure]";
                 var sqlCommand = new SqlCommand(query, sqlConnection);

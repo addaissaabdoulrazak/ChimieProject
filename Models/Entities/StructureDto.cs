@@ -22,6 +22,11 @@ namespace ChimieProject.Models.Entities
 
         public string Nom { get; set; }
 
+<<<<<<< HEAD
+=======
+        [Required]
+        [Display(Name = "Type Structure")]
+>>>>>>> 1e727d6868769feb8082402f522993853bc7dd1e
         public string Type { get; set; }
 
         public string Password { get; set; }
