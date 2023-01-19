@@ -60,9 +60,7 @@ namespace ChimieProject.Controllers
         [HttpPost]
         public IActionResult Inscription(StructureDto request)
         {
-<<<<<<< HEAD
-           
-=======
+
             Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
             //if (IsObjectEmailExist != null)
@@ -71,7 +69,6 @@ namespace ChimieProject.Controllers
             //}
 
 
->>>>>>> 97292bfb69e98821620641cff5fba3441aebad50
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
@@ -90,10 +87,7 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
-<<<<<<< HEAD
 
-=======
->>>>>>> 97292bfb69e98821620641cff5fba3441aebad50
 
         }
 //-------------------------------------------------[End Register]---------------------------------------------------------
