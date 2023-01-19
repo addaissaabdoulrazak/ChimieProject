@@ -63,12 +63,7 @@ namespace ChimieProject.Controllers
             //    ModelState.AddModelError("Email", "Email already exists");
             //}
 
-<<<<<<< Updated upstream
 
-=======
-            //if (ModelState.IsValid)
-            //{
->>>>>>> Stashed changes
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
@@ -87,13 +82,6 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
-<<<<<<< Updated upstream
-
-=======
-            //}
-
-            //return View(request);
->>>>>>> Stashed changes
 
         }
 //-------------------------------------------------[End Register]---------------------------------------------------------
@@ -135,6 +123,18 @@ namespace ChimieProject.Controllers
 
                     }
                     return RedirectToAction("Acceuil");
+
+                }else
+                {
+                    //string Token = _jwtAuthenticationService.CreateToken(user);
+                    string Token = _jwtAuthenticationService.BuildToken(_configuration.GetSection("Jwt:Key").Value.ToString(), _configuration.GetSection("Jwt:Issuer").Value.ToString(), objLab);
+
+                    if (Token != null)
+                    {
+                        HttpContext.Session.SetString("Token", Token);
+
+                    }
+                    return RedirectToAction("Acceuil", "Dashboard");
 
                 }
 

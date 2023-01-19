@@ -103,12 +103,12 @@ namespace ChimieProject.Models.DAL
             }
 
             public static long Insert(Produit item)
-            {
-                long response = long.MinValue;
+        {
+            CreateTable();
+            long response = long.MinValue;
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
-                {
+                {   
                     sqlConnection.Open();
-                CreateTable();
                 var sqlTransaction = sqlConnection.BeginTransaction();
 
                     string query = "INSERT INTO [Produit] ([CAS],[EtatPhysique],[Formule],[Nom])  VALUES (@CAS,@EtatPhysique,@Formule,@Nom); ";

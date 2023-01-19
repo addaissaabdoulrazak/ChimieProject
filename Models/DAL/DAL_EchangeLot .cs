@@ -12,7 +12,7 @@ namespace ChimieProject.Models.DAL
             {
                 SqlConnection cnn = DBConnection.GetConnection();
                 cnn.Open();
-                string sql = "If not exists (select * from sysobjects where name = 'Publication') CREATE TABLE [dbo].[EchangeLot] (\r\n    [Id]              BIGINT        IDENTITY (1, 1) NOT NULL,\r\n    [IdLabo]          BIGINT        NOT NULL,\r\n    [IdProduit]       BIGINT        NOT NULL,\r\n    [Type]            NVARCHAR (32) NOT NULL,\r\n    [DatePublication] DATETIME      NOT NULL,\r\n    [Purete]          NVARCHAR (32) NOT NULL,\r\n    [Concentration]   NVARCHAR (32) NOT NULL,\r\n    [DatePeremption]  DATETIME      NOT NULL,\r\n    [Quantite]        REAL          NOT NULL,\r\n    [UniteQuantite]   NVARCHAR (32) NOT NULL,\r\n    PRIMARY KEY CLUSTERED ([Id] ASC),\r\n    CONSTRAINT [FK_Produit] FOREIGN KEY ([IdProduit]) REFERENCES [dbo].[Produit] ([Id]),\r\n    CONSTRAINT [FK_Laboratoire] FOREIGN KEY ([IdLabo]) REFERENCES [dbo].[Structure] ([Id])\r\n); ";
+                string sql = "If not exists (select * from sysobjects where name = 'EchangeLot') CREATE TABLE [dbo].[EchangeLot] (\r\n    [Id]              BIGINT        IDENTITY (1, 1) NOT NULL,\r\n    [IdLabo]          BIGINT        NOT NULL,\r\n    [IdProduit]       BIGINT        NOT NULL,\r\n    [Type]            NVARCHAR (32) NOT NULL,\r\n    [DatePublication] DATETIME      NOT NULL,\r\n    [Purete]          NVARCHAR (32) NOT NULL,\r\n    [Concentration]   NVARCHAR (32) NOT NULL,\r\n    [DatePeremption]  DATETIME      NOT NULL,\r\n    [Quantite]        REAL          NOT NULL,\r\n    [UniteQuantite]   NVARCHAR (32) NOT NULL,\r\n    PRIMARY KEY CLUSTERED ([Id] ASC),\r\n    CONSTRAINT [FK_Produit] FOREIGN KEY ([IdProduit]) REFERENCES [dbo].[Produit] ([Id]),\r\n    CONSTRAINT [FK_Laboratoire] FOREIGN KEY ([IdLabo]) REFERENCES [dbo].[Structure] ([Id])\r\n); ";
                 using (SqlCommand command = new SqlCommand(sql, cnn))
                     command.ExecuteNonQuery();
                 cnn.Close();
@@ -68,12 +68,13 @@ namespace ChimieProject.Models.DAL
             }
 
             public static long Insert(EchangeLot item)
-            {
-                long response = long.MinValue;
+        {
+            CreateTable();
+            long response = long.MinValue;
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
                 {
                     sqlConnection.Open();
-                    CreateTable();
+                 
                 var sqlTransaction = sqlConnection.BeginTransaction();
 
                     string query = "INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Type],[Purete],[Quantite],[UniteQuantite])  VALUES (@Concentration,@DatePeremption,@DatePublication,@IdLabo,@IdProduit,@Type,@Purete,@Quantite,@UniteQuantite); ";
