@@ -1,6 +1,10 @@
-﻿@{
+﻿@using ChimieProject.Models.BLL
+@using ChimieProject.Models.Entities
+
+@{
     Layout = "_UserUI";
 }
+@model IEnumerable<ChimieProject.Models.Entities.EchangeLot>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -182,18 +186,24 @@
                     </tr>
                 </table>
             </div>  -->
+            @foreach (var obj in Model)
+                {
+                    {
+                        Structure LaboObject = BLL_Structure.Get(obj.IdLabo);
+                        Produit prodObject = BLL_Produit.Get(obj.IdProduit);
             <div class="publication">
-                <h4>FSM<br> <span>Laboratoire de chimie</span></h4>
+                        <h4>
+                            <span>@obj.DatePublication</span>
+                        </h4>
+                        <h4>@LaboObject.Nom<br>
+                            <span>@prodObject.Nom</span>
+                        </h4><br>
+                       
+
+                    <br>
             </div>
-            <div class="publication">
-                <h4>FSM<br> <span>Laboratoire de chimie</span></h4>
-            </div>
-            <div class="publication">
-                <h4>FSM<br> <span>Laboratoire de chimie</span></h4>
-            </div>
-            <div class="publication">
-                <h4>FSM<br> <span>Laboratoire de chimie</span></h4>
-            </div>
+                    }
+                }
             
         </div>
         
