@@ -50,35 +50,17 @@ namespace ChimieProject.Controllers
         [HttpGet]
         public IActionResult Inscription()
         {
-<<<<<<< HEAD
             StructureDto dt =new StructureDto();
             return View(dt);
-=======
-    //        Migration.CreationTableProduit();
-           Migration.CreationTableLaboratoire();
-            Migration.CreationTablePublication();
            
             return View();
->>>>>>> 1e727d6868769feb8082402f522993853bc7dd1e
         }
 
 
         [HttpPost]
         public IActionResult Inscription(StructureDto request)
         {
-            
-            //Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
-
-            //if (IsObjectEmailExist != null)
-            //{
-            //    ModelState.AddModelError("Email", "Email already exists");
-            //}
-
-<<<<<<< HEAD
-       
-=======
-    
->>>>>>> 1e727d6868769feb8082402f522993853bc7dd1e
+           
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
@@ -97,11 +79,6 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
-<<<<<<< HEAD
-           
-=======
-     
->>>>>>> 1e727d6868769feb8082402f522993853bc7dd1e
 
 
         }
