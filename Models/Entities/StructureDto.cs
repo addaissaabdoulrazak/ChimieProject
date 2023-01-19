@@ -24,7 +24,10 @@ namespace ChimieProject.Models.Entities
 
         [Required]
         [Display(Name = "Type Structure")]
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97292bfb69e98821620641cff5fba3441aebad50
         public string Type { get; set; }
 
         public string Password { get; set; }

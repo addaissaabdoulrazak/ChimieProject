@@ -7,7 +7,7 @@
 
 }
 
-@model IEnumerable<ChimieProject.Models.Entities.EchangeLot>
+@model ChimieProject.Models.Entities.EchangeLot 
 
 <br />
 @*--[Call Partial view Notification]--*@
@@ -38,56 +38,56 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var obj in Model)
+               @* @foreach (var obj in Model)
                 {
                     {
                         Structure LaboObject = BLL_Structure.Get(obj.IdLabo);
                         Produit prodObject = BLL_Produit.Get(obj.IdProduit);
                   
-                  
+                  *@
                     <tr>
                    
-                        <td width="30%">
+                        @*<td width="30%">
                             @LaboObject.Nom
                         </td>
                         <td width="30%">
                                 @prodObject.Nom
-                        </td>
+                        </td>*@
                          <td width="30%">
-                          @obj.Type
+                          jdjkdjdd
                         </td>
                      
                         <td width="30%">
-                          @obj.DatePublication
+                          
                         </td>
                         <td width="30%">
-                          @obj.Purete
+                          
                         </td>
                         <td width="30%">
-                            @obj.Concentration
+                            
                         </td>
                         <td width="30%">
-                            @obj.DatePeremption
+                            
                         </td>
                         <td width="30%">
-                            @obj.Quantite
+                           
                         </td>
                         <td width="30%">
-                            @obj.UniteQuantite
+                            
                         </td>
                         <td>
                             <div class="w-50 btn-group" role="group">
-                                        <a asp-controller="EchangeLot" asp-action="Edit" asp-route-id="@obj.Id"
+                                        <a asp-controller="EchangeLot" asp-action="Edit" asp-route-id=""
                                    class="btn btn-primary mx-2"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                <a  onclick="return Delete(@(obj.Id))"
+                                <a  onclick="return Delete()"
                                    class="btn btn-danger mx-2">
                                             <i class="fa-solid fa-trash-can"></i>
                                    Delete</a>
                             </div>
                         </td>
                     </tr>
-                    }
-                }
+                 @*   }
+                }*@
             </tbody>
         </table>
         @*pagination Processuce en cour de traitement ..........*@

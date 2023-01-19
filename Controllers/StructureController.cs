@@ -60,7 +60,18 @@ namespace ChimieProject.Controllers
         [HttpPost]
         public IActionResult Inscription(StructureDto request)
         {
+<<<<<<< HEAD
            
+=======
+            Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
+
+            //if (IsObjectEmailExist != null)
+            //{
+            //    ModelState.AddModelError("Email", "Email already exists");
+            //}
+
+
+>>>>>>> 97292bfb69e98821620641cff5fba3441aebad50
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
@@ -79,7 +90,10 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97292bfb69e98821620641cff5fba3441aebad50
 
         }
 //-------------------------------------------------[End Register]---------------------------------------------------------
@@ -121,6 +135,18 @@ namespace ChimieProject.Controllers
 
                     }
                     return RedirectToAction("Acceuil");
+
+                }else
+                {
+                    //string Token = _jwtAuthenticationService.CreateToken(user);
+                    string Token = _jwtAuthenticationService.BuildToken(_configuration.GetSection("Jwt:Key").Value.ToString(), _configuration.GetSection("Jwt:Issuer").Value.ToString(), objLab);
+
+                    if (Token != null)
+                    {
+                        HttpContext.Session.SetString("Token", Token);
+
+                    }
+                    return RedirectToAction("Acceuil", "Dashboard");
 
                 }
 
