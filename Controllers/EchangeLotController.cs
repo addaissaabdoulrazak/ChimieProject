@@ -9,7 +9,10 @@ namespace ChimieProject.Controllers
 
         public IActionResult Index()
         {
-           IEnumerable<EchangeLot> objEchangeLotList = BLL_EchangeLot.GetAll();
+            IEnumerable<EchangeLot> objEchangeLotList = BLL_EchangeLot.GetAll();
+            ViewBag.objProduitList = BLL_Produit.GetAll();
+
+            ViewBag.objLaboratoireList = BLL_Structure.GetAll();
 
             return View(objEchangeLotList);
         }
