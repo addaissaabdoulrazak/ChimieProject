@@ -13,8 +13,10 @@ namespace ChimieProject.Models.Entities
     {
         public string Acronyme { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
+        [Required]
         public string Etablissement { get; set; }
 
         [Key]
@@ -27,10 +29,13 @@ namespace ChimieProject.Models.Entities
 
         public string Type { get; set; }
 
+        [Required]
         public string Password { get; set; }
 
+        [Required]
         public string Responsable { get; set; }
 
+        [Required]
         public string Tel { get; set; }
 
 

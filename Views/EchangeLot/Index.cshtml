@@ -2,9 +2,7 @@
 @using ChimieProject.Models.Entities
 @{
 
-    Layout = "_Admin";
-
-
+    Layout = "_Acceuil";
 }
 
 @model IEnumerable<ChimieProject.Models.Entities.EchangeLot>
@@ -78,7 +76,7 @@
 
                         <td>
                             <div class="w-50 btn-group" role="group">
-                                        <a asp-controller="EchangeLot" asp-action="Edit" asp-route-id=""
+                                        <a asp-controller="EchangeLot" asp-action="Edit" asp-route-id="@obj.Id"
                                    class="btn btn-primary mx-2"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                 <a  onclick="return Delete(@(obj.Id))"
                                    class="btn btn-danger mx-2">

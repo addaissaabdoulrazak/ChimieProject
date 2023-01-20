@@ -14,9 +14,9 @@ namespace ChimieProject.Controllers
 
         private readonly IJwtAuthenticationService _jwtAuthenticationService;
 
-        //Use DataBinding
-        [BindProperty]
-        public Structure Structure { get; set; }
+        ////Use DataBinding
+        //[BindProperty]
+        //public Structure Structure { get; set; }
 
         //My controller
         public StructureController(IConfiguration configuration, IJwtAuthenticationService jwtAuthenticationService)
@@ -50,8 +50,6 @@ namespace ChimieProject.Controllers
         [HttpGet]
         public IActionResult Inscription()
         {
-            StructureDto dt =new StructureDto();
-            return View(dt);
            
             return View();
         }
@@ -63,18 +61,20 @@ namespace ChimieProject.Controllers
 
             Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
-            //if (IsObjectEmailExist != null)
-            //{
-            //    ModelState.AddModelError("Email", "Email already exists");
-            //}
+            if (IsObjectEmailExist != null)
+            {
+                ModelState.AddModelError("Email", "Email already exists");
+            }
 
 
+            if(ModelState.IsValid)
+            {
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
 
                 _Struc.Nom = request.Nom;
-                _Struc.Type=request.Type;
+                _Struc.Type = request.Type;
                 _Struc.Email = request.Email;
                 _Struc.Acronyme = request.Acronyme;
                 _Struc.Password = EncryptedPassword;
@@ -87,6 +87,10 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
+
+            }
+            return View(request);
+
 
 
         }
@@ -182,54 +186,34 @@ namespace ChimieProject.Controllers
             return View();
         }
 
-
-        [HttpGet]
-        public IActionResult Upsert(long? id)
-        {
-            
-            if (id == null)
-            {
-                //create
-                return View();
-            }
-            //update
-            Structure objStructure= BLL_Structure.Get((long)id);
-            if (objStructure == null)
-            {
-                return NotFound();
-            }
-            return View(objStructure);
-        }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert()
+        public IActionResult CreateNewStructure(Structure request)
         {
             if (ModelState.IsValid)
             {
-                if (Structure.Id == 0)
-                {
-                    //create
-                    BLL_Structure.Insert(Structure);
-                }
-                else
-                {
-                    BLL_Structure.Update(Structure);
-                }
+                request.Statut = 1;
+                    //create New User
+                    BLL_Structure.Insert(request);
                 
                 return RedirectToAction("SettingManagement");
             }
-            return View(Structure);
+            return View(request);
         }
 
+        [HttpGet]
+        public IActionResult EditStructure()
+        {
+            return View();
+        }
+
+        public IActionResult EditStructure(Structure request)
+        {
+            return View();
+        }
+
+
         //-------------------------------------[End]--------------------------------------//
-
-
-
- //--------------------------------------------------------------[o Check Permission Within Action Method]------------------------------------------------------------------//
-
-
 
 
         [HttpGet]

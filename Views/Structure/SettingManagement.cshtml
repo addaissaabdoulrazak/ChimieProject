@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "_Setting";
 }
+@model ChimieProject.Models.Entities.Structure;
 <br />
 <div class="container row p-0 m-0">
     <div class="col-6">
@@ -38,16 +39,11 @@
                 @*Inject my partial View  | _UpsertPartialView |*@
                 <partial name="~/Views/_UpsertPartialView.cshtml" model="@Model" />
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Ajouter</button>
-            </div>
+
         </div>
     </div>
 </div>
 <!-- End Modal -->
-
-
 @section Scripts{
     @{
     <script src="~/js/SettingManagement.js"></script>
