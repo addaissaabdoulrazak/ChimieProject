@@ -14,6 +14,7 @@ namespace ChimieProject.Models.Entities
         public string Acronyme { get; set; }
 
         [Required]
+        [EmailUserUnique]
         public string Email { get; set; }
 
         [Required]
@@ -22,6 +23,8 @@ namespace ChimieProject.Models.Entities
         [Key]
         public long Id { get; set; }
 
+        [Required]
+        [NameUserUnique]
         public string Nom { get; set; }
 
         [Required]

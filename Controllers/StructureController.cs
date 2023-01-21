@@ -59,12 +59,12 @@ namespace ChimieProject.Controllers
         public IActionResult Inscription(StructureDto request)
         {
 
-            Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
+            //Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
-            if (IsObjectEmailExist != null)
-            {
-                ModelState.AddModelError("Email", "Email already exists");
-            }
+            //if (IsObjectEmailExist != null)
+            //{
+            //    ModelState.AddModelError("Email", "Email already exists");
+            //}
 
 
             if(ModelState.IsValid)
