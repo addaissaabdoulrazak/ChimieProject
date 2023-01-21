@@ -31,5 +31,9 @@ namespace ChimieProject.Controllers
         {
             return Json(BLL_Produit.Update(produit));
         }
+        public IActionResult Rechercher(string Nom, string Formule, string Cas, string EtatPhysique)
+        {
+            return Json(BLL_Produit.rechercher(Nom, Formule, Cas, EtatPhysique));
+        }
     }
 }

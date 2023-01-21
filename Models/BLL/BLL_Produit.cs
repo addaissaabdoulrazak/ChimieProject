@@ -45,6 +45,11 @@ namespace ChimieProject.Models.BLL
             return DAL_Produit.Get();
         }
 
+        public static List<Produit> rechercher(string nom, string formule, string cas, string etatPhysique)
+        {
+            return DAL_Produit.recherche( nom,  formule,  cas, etatPhysique);
+        }
+
         public static long Insert(Produit item)
         {
             return DAL_Produit.Insert(item);
