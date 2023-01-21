@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace ChimieProject.Models.DAL
 {
-    public class DAL_EchangeLot
+    public class DAL_Publication
     {
         public static void CreateTable()
         {
@@ -21,7 +21,7 @@ namespace ChimieProject.Models.DAL
             catch { }
         }
         #region Default Methods
-        public static EchangeLot Get(long id)
+        public static Publication Get(long id)
             {
                 var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
@@ -37,7 +37,7 @@ namespace ChimieProject.Models.DAL
 
                 if (dataTable.Rows.Count > 0)
                 {
-                    return new EchangeLot(dataTable.Rows[0]);
+                    return new Publication(dataTable.Rows[0]);
                 }
                 else
                 {
@@ -45,7 +45,7 @@ namespace ChimieProject.Models.DAL
                 }
             }
 
-            public static List<EchangeLot> Get()
+            public static List<Publication> Get()
             {
                 var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
@@ -60,15 +60,15 @@ namespace ChimieProject.Models.DAL
 
                 if (dataTable.Rows.Count > 0)
                 {
-                    return dataTable.Rows.Cast<DataRow>().Select(x => new EchangeLot(x)).ToList();
+                    return dataTable.Rows.Cast<DataRow>().Select(x => new Publication(x)).ToList();
                 }
                 else
                 {
-                    return new List<EchangeLot>();
+                    return new List<Publication>();
                 }
             }
 
-            public static long Insert(EchangeLot item)
+            public static long Insert(Publication item)
         {
             CreateTable();
             long response = long.MinValue;
@@ -103,7 +103,7 @@ namespace ChimieProject.Models.DAL
                 }
             }
 
-            private static int insert(List<EchangeLot> items)
+            private static int insert(List<Publication> items)
             {
                 if (items != null && items.Count > 0)
                 {
@@ -154,7 +154,7 @@ namespace ChimieProject.Models.DAL
                 return -1;
             }
 
-            public static int Update(EchangeLot item)
+            public static int Update(Publication item)
             {
                 int results = -1;
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
@@ -180,7 +180,7 @@ namespace ChimieProject.Models.DAL
                 return results;
             }
 
-            private static int update(List<EchangeLot> items)
+            private static int update(List<Publication> items)
             {
                 if (items != null && items.Count > 0)
                 {

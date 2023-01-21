@@ -335,7 +335,7 @@ namespace ChimieProject.Models.DAL
         {
           
             Structure structure = Get(id);
-            DAL_EchangeLot.Delete(structure.Id);
+            DAL_Publication.Delete(structure.Id);
             int results = -1;
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {

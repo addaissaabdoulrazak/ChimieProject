@@ -134,7 +134,7 @@ namespace ChimieProject.Controllers
                     }
                     return RedirectToAction("Acceuil");
 
-                }else
+                }else if(DecryptedPassword == request.Password && objLab.Nom == request.Nom && objLab.Role == Roles.USER.ToString())
                 {
                     //string Token = _jwtAuthenticationService.CreateToken(user);
                     string Token = _jwtAuthenticationService.BuildToken(_configuration.GetSection("Jwt:Key").Value.ToString(), _configuration.GetSection("Jwt:Issuer").Value.ToString(), objLab);
@@ -146,6 +146,10 @@ namespace ChimieProject.Controllers
                     }
                     return RedirectToAction("Acceuil", "Dashboard");
 
+                }
+                else
+                {
+                    return NotFound();
                 }
 
             }

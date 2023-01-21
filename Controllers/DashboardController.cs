@@ -12,7 +12,7 @@ namespace ChimieProject.Controllers
         }
         public IActionResult Acceuil()
         {
-            IEnumerable<EchangeLot> ListPublication = BLL_EchangeLot.GetAll();
+            IEnumerable<Publication> ListPublication = BLL_Publication.GetAll();
 
 
             return View(ListPublication);
