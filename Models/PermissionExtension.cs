@@ -10,7 +10,7 @@ namespace ChimieProject.Models
         {
             public static bool HavePermission(this Controller c, string claimValue)
             {
-                var structure = c.HttpContext.User as ClaimsPrincipal;
+                var structure = c.HttpContext.User;
                  bool havePer = structure.HasClaim(claimValue, claimValue);
                     return havePer;
             }

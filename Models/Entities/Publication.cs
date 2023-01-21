@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace ChimieProject.Models.Entities
 {
-    public class EchangeLot
+    public class Publication
     {
         [Required]
         public string Concentration { get; set; }
@@ -51,9 +51,9 @@ namespace ChimieProject.Models.Entities
         public string UniteQuantite { get; set; }
 
 
-        public EchangeLot() { }
+        public Publication() { }
 
-        public EchangeLot(DataRow dataRow)
+        public Publication(DataRow dataRow)
         {
             Concentration = (dataRow["Concentration"] == System.DBNull.Value) ? "" : Convert.ToString(dataRow["Concentration"]);
             DatePeremption = (dataRow["DatePeremption"] == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(dataRow["DatePeremption"]);

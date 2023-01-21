@@ -14,9 +14,9 @@ namespace ChimieProject.Controllers
 
         private readonly IJwtAuthenticationService _jwtAuthenticationService;
 
-        //Use DataBinding
-        [BindProperty]
-        public Structure Structure { get; set; }
+        ////Use DataBinding
+        //[BindProperty]
+        //public Structure Structure { get; set; }
 
         //My controller
         public StructureController(IConfiguration configuration, IJwtAuthenticationService jwtAuthenticationService)
@@ -50,9 +50,6 @@ namespace ChimieProject.Controllers
         [HttpGet]
         public IActionResult Inscription()
         {
-    //        Migration.CreationTableProduit();
-           Migration.CreationTableLaboratoire();
-            Migration.CreationTablePublication();
            
             return View();
         }
@@ -60,8 +57,8 @@ namespace ChimieProject.Controllers
 
         [HttpPost]
         public IActionResult Inscription(StructureDto request)
-        {
-            
+         {
+
             //Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
             //if (IsObjectEmailExist != null)
@@ -69,13 +66,15 @@ namespace ChimieProject.Controllers
             //    ModelState.AddModelError("Email", "Email already exists");
             //}
 
-    
+
+            if(ModelState.IsValid)
+            {
                 Structure _Struc = new Structure();
 
                 string EncryptedPassword = _jwtAuthenticationService.Encrypt(request.Password);
 
                 _Struc.Nom = request.Nom;
-                _Struc.Type=request.Type;
+                _Struc.Type = request.Type;
                 _Struc.Email = request.Email;
                 _Struc.Acronyme = request.Acronyme;
                 _Struc.Password = EncryptedPassword;
@@ -88,7 +87,10 @@ namespace ChimieProject.Controllers
                 BLL_Structure.Insert(_Struc);
                 TempData["success"] = "Registered successfully";
                 return RedirectToAction("Inscription");
-     
+
+            }
+            return View(request);
+
 
 
         }
@@ -100,7 +102,7 @@ namespace ChimieProject.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(StructureDto request)
+        public IActionResult Login(Structure request)
         {
 
             if (string.IsNullOrEmpty(request.Nom) || string.IsNullOrEmpty(request.Password))
@@ -132,6 +134,22 @@ namespace ChimieProject.Controllers
                     }
                     return RedirectToAction("Acceuil");
 
+                }else if(DecryptedPassword == request.Password && objLab.Nom == request.Nom && objLab.Role == Roles.USER.ToString())
+                {
+                    //string Token = _jwtAuthenticationService.CreateToken(user);
+                    string Token = _jwtAuthenticationService.BuildToken(_configuration.GetSection("Jwt:Key").Value.ToString(), _configuration.GetSection("Jwt:Issuer").Value.ToString(), objLab);
+
+                    if (Token != null)
+                    {
+                        HttpContext.Session.SetString("Token", Token);
+
+                    }
+                    return RedirectToAction("Acceuil", "Dashboard");
+
+                }
+                else
+                {
+                    return NotFound();
                 }
 
             }
@@ -172,46 +190,32 @@ namespace ChimieProject.Controllers
             return View();
         }
 
-
-        [HttpGet]
-        public IActionResult Upsert(long? id)
-        {
-            
-            if (id == null)
-            {
-                //create
-                return View();
-            }
-            //update
-            Structure objStructure= BLL_Structure.Get((long)id);
-            if (objStructure == null)
-            {
-                return NotFound();
-            }
-            return View(objStructure);
-        }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert()
+        public IActionResult CreateNewStructure(Structure request)
         {
             if (ModelState.IsValid)
             {
-                if (Structure.Id == 0)
-                {
-                    //create
-                    BLL_Structure.Insert(Structure);
-                }
-                else
-                {
-                    BLL_Structure.Update(Structure);
-                }
+                request.Statut = 1;
+                    //create New User
+                    BLL_Structure.Insert(request);
                 
                 return RedirectToAction("SettingManagement");
             }
-            return View(Structure);
+            return View(request);
         }
+
+        [HttpGet]
+        public IActionResult EditStructure()
+        {
+            return View();
+        }
+
+        public IActionResult EditStructure(Structure request)
+        {
+            return View();
+        }
+
 
         //-------------------------------------[End]--------------------------------------//
 

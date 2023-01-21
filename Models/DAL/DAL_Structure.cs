@@ -7,6 +7,21 @@ namespace ChimieProject.Models.DAL
 
     public class DAL_Structure
     {
+        //Create table
+        public static void CreateTable()
+        {
+            try
+            {
+                SqlConnection cnn = DBConnection.GetConnection();
+                cnn.Open();
+                string sql = "If not exists (select * from sysobjects where name = 'Structure') CREATE TABLE [dbo].[Structure] ([Id] BIGINT IDENTITY (1, 1) NOT NULL,[Nom] NVARCHAR (256) NOT NULL,[Acronyme] NVARCHAR (32)  NOT NULL,[Etablissement] NVARCHAR (256) NOT NULL,[Responsable]   NVARCHAR (64)  NOT NULL,[Type] NVARCHAR (64)  NOT NULL,[Email] NVARCHAR (32)  NOT NULL,[Tel] NVARCHAR (32)  NOT NULL, [Password] NVARCHAR (200) NOT NULL,[Statut] INT NOT NULL, [Role]  VARCHAR (50)   NOT NULL,\r\n    PRIMARY KEY CLUSTERED ([Id] ASC), CONSTRAINT [AK_Email_Laboratoire] UNIQUE NONCLUSTERED ([Email] ASC), UNIQUE NONCLUSTERED ([Email] ASC)); ";
+                using (SqlCommand command = new SqlCommand(sql, cnn))
+                    command.ExecuteNonQuery();
+                cnn.Close();
+            }
+            catch { }
+        }
+
         #region Default Methods
         public static Structure Get(long id)
         {
@@ -67,6 +82,7 @@ namespace ChimieProject.Models.DAL
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
+                CreateTable();
                 string query = "SELECT * FROM [Structure] WHERE [Email]=@Email";
                 var sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("Email", Email);
@@ -148,6 +164,7 @@ namespace ChimieProject.Models.DAL
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
+                CreateTable();
                 var sqlTransaction = sqlConnection.BeginTransaction();
 
                 //testez voir
@@ -316,6 +333,9 @@ namespace ChimieProject.Models.DAL
 
         public static int Delete(long id)
         {
+          
+            Structure structure = Get(id);
+            DAL_Publication.Delete(structure.Id);
             int results = -1;
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {

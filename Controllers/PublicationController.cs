@@ -4,14 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChimieProject.Controllers
 {
-    public class EchangeLotController : Controller
+    public class PublicationController : Controller
     {
 
         public IActionResult Index()
         {
-           IEnumerable<EchangeLot> objEchangeLotList = BLL_EchangeLot.GetAll();
+            ViewBag.objEchangeLotList = BLL_Publication.GetAll();
+            ViewBag.objProduitList = BLL_Produit.GetAll();
 
-            return View(objEchangeLotList);
+            ViewBag.objLaboratoireList = BLL_Structure.GetAll();
+
+            return View();
         }
 
         //GET
@@ -28,7 +31,7 @@ namespace ChimieProject.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(EchangeLot request)
+        public IActionResult Create(Publication request)
         {
             ViewBag.objProduitList = BLL_Produit.GetAll();
 
@@ -37,7 +40,7 @@ namespace ChimieProject.Controllers
             if (ModelState.IsValid)
             {
 
-                BLL_EchangeLot.Insert(request);
+                BLL_Publication.Insert(request);
                 TempData["success"] = "Created successfully";
                 return RedirectToAction("Index");
             }
@@ -55,7 +58,7 @@ namespace ChimieProject.Controllers
             {
                 return NotFound();
             }
-            var EchangeLotFromDb = BLL_EchangeLot.Get(id);
+            var EchangeLotFromDb = BLL_Publication.Get(id);
 
             if (EchangeLotFromDb == null)
             {
@@ -68,7 +71,7 @@ namespace ChimieProject.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(EchangeLot obj)
+        public IActionResult Edit(Publication obj)
         {
             ViewBag.objProduitList = BLL_Produit.GetAll();
 
@@ -76,8 +79,8 @@ namespace ChimieProject.Controllers
 
             if (ModelState.IsValid)
             {
-                BLL_EchangeLot.Update(obj); 
-                TempData["success"] = "EchangeLot updated successfully";
+                BLL_Publication.Update(obj); 
+                TempData["success"] = "Publication modifier avec succès";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -87,7 +90,7 @@ namespace ChimieProject.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var EchangeLotFromDb = BLL_EchangeLot.Get(id);
+            var EchangeLotFromDb = BLL_Publication.Get(id);
 
             if (EchangeLotFromDb == null)
             {
@@ -96,9 +99,9 @@ namespace ChimieProject.Controllers
             }
 
 
-            BLL_EchangeLot.Delete(id);
-            TempData["success"] = "EchangeLot deleted successfully";
-            return Json(new { success = true, message = "deleted successful" });
+            BLL_Publication.Delete(id);
+            TempData["success"] = "Publication suprimer avec succès";
+            return Json(new { success = true, message = "Supprimer avec succès" });
         }
 
       

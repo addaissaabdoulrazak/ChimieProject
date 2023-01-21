@@ -3,7 +3,7 @@
 <div class="pen-title"></div>
     <partial name="_Notification">
     <div class="border container" style="padding:30px;">
-        <form method="post" asp-action="Create" asp-controller="EchangeLot">
+        <form method="post" asp-action="CreateNewStructure" asp-controller="Structure">
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 
             <div class="row pb-2">
@@ -11,7 +11,7 @@
                 <hr />
             </div>
             <div class="row mb-3">
-                <label asp-for="Nom" class="col-sm-2 col-form-label mt-4"></label>
+                <label asp-for="Nom" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
                     <input asp-for="Nom" class="form-control" type="text" />
                     <span asp-validation-for="Nom" class="text-danger"></span>
@@ -40,13 +40,14 @@
             </div>
             </div>
             <div class="row mb-3">
-              <label asp-for="Etablissement" class="col-sm-2 col-form-label mt-4">Ets</label>
+              <label asp-for="Etablissement" class="col-sm-2 col-form-label">Ets</label>
                 <div class="col-sm-10">
                 <select asp-for="Etablissement" class="form-select" aria-label="Default select example">
                     <option selected>choisissez un Etablissement</option>
                     <option value="Université de Tunis" class="form-control">Université de Tunis</option>
                     <option value="Université de Monastir" class="form-control">Université de Monastir</option>
                     <option value="Université de Gabès" class="form-control">Université de Gabès</option>
+                        <option value="Université de Gabès" class="form-control">Université de Mahadia</option>
                     <option value="Université de Sousse" class="form-control">Université de Sousse</option>
                     <option value="Université de Jendouba" class="form-control">Université de Jendouba</option>
                     <option value="Université de Carthage" class="form-control">Université de Carthage</option>
@@ -57,7 +58,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-            <label asp-for="Email" class="col-sm-2 col-form-label mt-4"></label>
+            <label asp-for="Email" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">    
                 <input asp-for="Email" class="form-control" type="email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -77,13 +78,16 @@
               <span asp-validation-for="Tel" class="text-danger"></span>
                 </div>
             </div>
-           @* <div class="row mb-3">
-                <label asp-for="Type" class="col-sm-2 col-form-label mt-4"></label>
+
+            <div class="row mb-3">
+                <label asp-for="Statut" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <input asp-for="Type" class="form-control" />
-                    <span asp-validation-for="Type" class="text-danger"></span>
+
+                    <input value="Actif" class="form-control" disabled>
+                   
+                    <span asp-validation-for="Role" class="text-danger"></span>
                 </div>
-            </div>*@
+            </div>
             <div class="row mb-3">
                 <label asp-for="Role" class="col-sm-2 col-form-label">Role</label>
              <div class="col-sm-10">      
@@ -102,6 +106,10 @@
               <input asp-for="Password" class="form-control" type="password" />
               <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
             </div>
         </form>
     </div>

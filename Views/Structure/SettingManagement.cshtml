@@ -1,13 +1,14 @@
 ﻿@{
     Layout = "_Setting";
 }
+@model ChimieProject.Models.Entities.Structure;
 <br />
 <div class="container row p-0 m-0">
     <div class="col-6">
         <h2 class="text-info">Book List</h2>
     </div>
     <div class="col-3 offset-3">
-        <a class="btn btn-info form-control text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <a class="btn btn-info form-control text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add New User
         </a>
     </div>
@@ -25,29 +26,24 @@
         </table>
     </div>
 </div>
+
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
                 @*Inject my partial View  | _UpsertPartialView |*@
                 <partial name="~/Views/_UpsertPartialView.cshtml" model="@Model" />
+            </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create</button>
-            </div>
         </div>
     </div>
 </div>
 <!-- End Modal -->
-
 @section Scripts{
     @{
     <script src="~/js/SettingManagement.js"></script>

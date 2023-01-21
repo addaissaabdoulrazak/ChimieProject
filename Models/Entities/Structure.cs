@@ -16,11 +16,12 @@ namespace ChimieProject.Models.Entities
 
         public string Etablissement { get; set; }
         public long Id { get; set; }
-
+        [Required]
         public string Nom { get; set; }
 
         public string Type { get; set; }
 
+        [Required]
         public string Password { get; set; }
 
         public string Responsable { get; set; }

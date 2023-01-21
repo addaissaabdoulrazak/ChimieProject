@@ -4,11 +4,24 @@ using System.Data.SqlClient;
 
 namespace ChimieProject.Models.DAL
 {
-    public class DAL_EchangeLot
+    public class DAL_Publication
     {
+        public static void CreateTable()
+        {
+            try
+            {
+                SqlConnection cnn = DBConnection.GetConnection();
+                cnn.Open();
+                string sql = "If not exists (select * from sysobjects where name = 'EchangeLot') CREATE TABLE [dbo].[EchangeLot] (\r\n    [Id]              BIGINT        IDENTITY (1, 1) NOT NULL,\r\n    [IdLabo]          BIGINT        NOT NULL,\r\n    [IdProduit]       BIGINT        NOT NULL,\r\n    [Type]            NVARCHAR (32) NOT NULL,\r\n    [DatePublication] DATETIME      NOT NULL,\r\n    [Purete]          NVARCHAR (32) NOT NULL,\r\n    [Concentration]   NVARCHAR (32) NOT NULL,\r\n    [DatePeremption]  DATETIME      NOT NULL,\r\n    [Quantite]        REAL          NOT NULL,\r\n    [UniteQuantite]   NVARCHAR (32) NOT NULL,\r\n    PRIMARY KEY CLUSTERED ([Id] ASC),\r\n    CONSTRAINT [FK_Produit] FOREIGN KEY ([IdProduit]) REFERENCES [dbo].[Produit] ([Id]),\r\n    CONSTRAINT [FK_Laboratoire] FOREIGN KEY ([IdLabo]) REFERENCES [dbo].[Structure] ([Id])\r\n); ";
+                using (SqlCommand command = new SqlCommand(sql, cnn))
+                    command.ExecuteNonQuery();
+                cnn.Close();
 
-            #region Default Methods
-            public static EchangeLot Get(long id)
+            }
+            catch { }
+        }
+        #region Default Methods
+        public static Publication Get(long id)
             {
                 var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
@@ -24,7 +37,7 @@ namespace ChimieProject.Models.DAL
 
                 if (dataTable.Rows.Count > 0)
                 {
-                    return new EchangeLot(dataTable.Rows[0]);
+                    return new Publication(dataTable.Rows[0]);
                 }
                 else
                 {
@@ -32,7 +45,7 @@ namespace ChimieProject.Models.DAL
                 }
             }
 
-            public static List<EchangeLot> Get()
+            public static List<Publication> Get()
             {
                 var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
@@ -47,21 +60,23 @@ namespace ChimieProject.Models.DAL
 
                 if (dataTable.Rows.Count > 0)
                 {
-                    return dataTable.Rows.Cast<DataRow>().Select(x => new EchangeLot(x)).ToList();
+                    return dataTable.Rows.Cast<DataRow>().Select(x => new Publication(x)).ToList();
                 }
                 else
                 {
-                    return new List<EchangeLot>();
+                    return new List<Publication>();
                 }
             }
 
-            public static long Insert(EchangeLot item)
-            {
-                long response = long.MinValue;
+            public static long Insert(Publication item)
+        {
+            CreateTable();
+            long response = long.MinValue;
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
                 {
                     sqlConnection.Open();
-                    var sqlTransaction = sqlConnection.BeginTransaction();
+                 
+                var sqlTransaction = sqlConnection.BeginTransaction();
 
                     string query = "INSERT INTO [EchangeLot] ([Concentration],[DatePeremption],[DatePublication],[IdLabo],[IdProduit],[Type],[Purete],[Quantite],[UniteQuantite])  VALUES (@Concentration,@DatePeremption,@DatePublication,@IdLabo,@IdProduit,@Type,@Purete,@Quantite,@UniteQuantite); ";
                     query += "SELECT SCOPE_IDENTITY();";
@@ -88,7 +103,7 @@ namespace ChimieProject.Models.DAL
                 }
             }
 
-            private static int insert(List<EchangeLot> items)
+            private static int insert(List<Publication> items)
             {
                 if (items != null && items.Count > 0)
                 {
@@ -139,7 +154,7 @@ namespace ChimieProject.Models.DAL
                 return -1;
             }
 
-            public static int Update(EchangeLot item)
+            public static int Update(Publication item)
             {
                 int results = -1;
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
@@ -165,7 +180,7 @@ namespace ChimieProject.Models.DAL
                 return results;
             }
 
-            private static int update(List<EchangeLot> items)
+            private static int update(List<Publication> items)
             {
                 if (items != null && items.Count > 0)
                 {

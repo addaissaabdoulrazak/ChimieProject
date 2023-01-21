@@ -1,17 +1,16 @@
-﻿@model ChimieProject.Models.Entities.EchangeLot;
+﻿@model ChimieProject.Models.Entities.Publication;
 @{
 
-    Layout = "_Layout";
+    Layout = "_Acceuil";
 
     var objProduitList = ViewBag.objProduitList;
 
     var objLaboratoireList = ViewBag.objLaboratoireList;
 }
-<partial name="_Notification">
-    <div class="border container" style="padding:30px;">
-        <form method="post" asp-action="Create" asp-controller="EchangeLot">
-            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 
+    <div class="border container" style="padding:30px;">
+        <form method="post" asp-action="Edit" asp-controller="Publication">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             <div class="row pb-2">
                 <h2 class="text-primary">Edit</h2>
                 <hr />
@@ -100,8 +99,18 @@
             <div class="row mb-3">
                 <label asp-for="UniteQuantite " class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <input asp-for="UniteQuantite " class="form-control" type="text" />
-                    <span asp-validation-for="UniteQuantite " class="text-danger"></span>
+
+                    @*=========*===========================[Modified this after]=====================================================================*@
+   
+                                <select asp-for="UniteQuantite" class="form-select" aria-label="Default select example">
+                                    <option selected>ouvrir</option>
+                                    <option value="Cl">Centilitre</option>
+                                    <option value="Ml">Millilitre</option>
+                                    <option value="l">Litre</option>
+                                </select>
+                       
+                         <span asp-validation-for="UniteQuantite" class="text-danger"></span>
+                    @*=========*===========================[Modified this after]=====================================================================*@
                 </div>
             </div>
             <div class="form-group row">
@@ -111,7 +120,7 @@
                     </button>
                 </div>
                 <div class="col-3">
-                    <a asp-action="Index" asp-controller="EchangeLot" class="btn btn-success form-control">Retour a la Liste</a>
+                    <a asp-action="Index" asp-controller="Publication" class="btn btn-success form-control">Retour a la Liste</a>
                 </div>
             </div>
         </form>
