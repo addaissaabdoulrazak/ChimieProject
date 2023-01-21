@@ -230,7 +230,7 @@ body {
     object-fit: cover;
 }
 /* ======================= Publication=========*/
-.publication {
+/*.publication {
     position: relative;
     display: grid;
     min-height: 50px;
@@ -247,7 +247,7 @@ body {
     .publication:hover {
         background: var(--blue);
         color: var(--white);
-    }
+    */}
 
 /* ======================= Cards ====================== */
 .cardBox {

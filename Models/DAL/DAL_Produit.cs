@@ -241,7 +241,7 @@ namespace ChimieProject.Models.DAL
             public static int Delete(long id)
             {
                  Produit product = Get(id);
-                 DAL_Publication.Delete(product.Id);
+                 DAL_Publication.DeleteForeingKeyProduitId(product.Id);
                  
                 int results = -1;
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())

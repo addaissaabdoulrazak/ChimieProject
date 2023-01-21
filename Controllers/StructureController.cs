@@ -271,6 +271,27 @@ namespace ChimieProject.Controllers
 
             return Json(new { success = true, message = "accepted" });
         }
-        #endregion
+
+        //Delete Compte
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var StructureFromDb = BLL_Structure.Get(id);
+
+            if (StructureFromDb == null)
+            {
+                TempData["error"] = "Error while deleting";
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+
+
+            BLL_Structure.Delete(id);
+            TempData["success"] = "Ce compte a été supprimer avec succèss";
+            return Json(new { success = true, message = "Supprimer avec succès" });
+        }
+
+
     }
+
+    #endregion
 }

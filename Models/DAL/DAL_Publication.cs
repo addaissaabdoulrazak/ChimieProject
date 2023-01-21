@@ -247,10 +247,41 @@ namespace ChimieProject.Models.DAL
                 return results;
             }
 
-            #endregion
+        public static int DeleteForeingKeyProduitId(long id)
+        {
+            int results = -1;
+            using (SqlConnection sqlConnection = DBConnection.GetConnection())
+            {
+                sqlConnection.Open();
+                string query = "DELETE FROM [EchangeLot] WHERE [IdProduit]=@Id";
+                var sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("Id", id);
 
-            #region Custom Methods
+                results = sqlCommand.ExecuteNonQuery();
+            }
 
-            #endregion
+            return results;
+        }
+        public static int DeleteForeignKeyStructureId(long id)
+        {
+            int results = -1;
+            using (SqlConnection sqlConnection = DBConnection.GetConnection())
+            {
+                sqlConnection.Open();
+                string query = "DELETE FROM [EchangeLot] WHERE [IdLabo]=@Id";
+                var sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("Id", id);
+
+                results = sqlCommand.ExecuteNonQuery();
+            }
+
+            return results;
+        }
+
+        #endregion
+
+        #region Custom Methods
+
+        #endregion
     }
 }

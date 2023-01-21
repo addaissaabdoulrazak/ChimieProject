@@ -15,6 +15,7 @@
 <div>
     <form method="post" asp-action="Create" asp-controller="Publication">
         <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <partial name="_Notification">
         @*Labo Liste*@
         <div class="row mb-3">
             <label asp-for="IdLabo" class="col-sm-2 col-form-label">Non du Labratoire</label>

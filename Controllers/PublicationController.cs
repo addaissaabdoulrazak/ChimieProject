@@ -86,7 +86,7 @@ namespace ChimieProject.Controllers
             return View(obj);
         }
 
-        //Delete Compte
+        //Delete Publication
         [HttpDelete]
         public IActionResult Delete(int id)
         {

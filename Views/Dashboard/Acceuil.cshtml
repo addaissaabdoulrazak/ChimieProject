@@ -12,9 +12,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="~/css/UserAcceuil.css">
+  @*  <link href="~/css/publication.css" rel="stylesheet" />*@
+      <link href="~/css/test.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -45,11 +47,12 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a asp-controller="Produit" asp-action="Index">
                         <span class="icon">
                             <ion-icon name="list-circle-outline"></ion-icon>
+                            <i class="fa-brands fa-product-hunt"></i>
                         </span>
-                        <span class="title">Mes Publications</span>
+                        <span class="title"> Gestion des Produit </span>
                     </a>
                 </li>
 
@@ -111,18 +114,17 @@
         </div>
 
         <!-- ========================= Main ==================== -->
-        <div class="main">
             <div class="topbar">
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
 
-                <div class="search">
+                @*<div class="search">
                     <label>
                         <input type="text" placeholder="Search here">
                         <ion-icon name="search-outline"></ion-icon>
                     </label>
-                </div>
+                </div>*@
 
                 <div class="user">
                     <img src="~/images/profil.png" alt="">
@@ -130,80 +132,190 @@
             </div>
 
             <!-- ======================= Cards ================== -->
-            <div class="cardBox">
-                <div class="card">
-                    
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
+            <div class="pub-manager">
+                <!---- HEADER (SEARCH)---->
+                <div class="pub-header">
+                    <h1>Publication Manager</h1>
+                    <fieldset class="pub-header--search">
+                        <div class="form-field search--publications">
+                            <label>Publication</label>
+                            <input type="text" class="pub-input" placeholder="Enter Keyword, Title, or Category">
+                        </div>
+                        <div class="form-field search--date">
+                            <label>Date</label>
+                            <input type="text" class="pub-input" placeholder="Enter Date or Date Range">
+                        </div>
+                        <button class="button button__primary button__search">Search</button>
+                    </fieldset>
+                    <div class="pub-header--create">
+                        <button class="button button__primary button__create" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Publication</button>
+                    </div>
+                </div>
+                <!---- SIDEBAR ---->
+                <div class="pub-sidebar">
+                    <div class="sidebar-module sidebar-module__my-publications">
+                        <h2>My Publications</h2>
+                        <ul>
+                            <li><a href="#" class="profile-link">My Profile</a></li>
+                            <li><a href="#" class="publications-link">Saved Publications</a></li>
+                            <li><a href="#" class="searches-link">Saved Searches</a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-module sidebar-module__refine">
+                        <h2>Refine Search</h2>
+                        <fieldset>
+                            <div class="form-field">
+                                <label>by Category</label>
+                                <select>
+                                    <option>Select or Search for Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                    <option>Category</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label>by Creator</label>
+                                <select>
+                                    <option>Select or Search by Creator</option>
+                                    <option>Creator</option>
+                                    <option>Creator</option>
+                                    <option>Creator</option>
+                                    <option>Creator</option>
+                                    <option>Creator</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label>by Author</label>
+                                <select>
+                                    <option>Select or Search by Author</option>
+                                    <option>Author</option>
+                                    <option>Author</option>
+                                    <option>Author</option>
+                                    <option>Author</option>
+                                    <option>Author</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group__radio">
+                                <label>by Date Posted</label>
+                                <div class="form-field field__radio-list">
+                                    <label>
+                                        <input type="radio" name="date" value="seven">
+                                        Last 7 Days
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="date" value="thirty">
+                                        Last 30 Days
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="date" value="ninety">
+                                        Last 90 Days
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="date" value="all">
+                                        All
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="iconBx">
-                        <ion-icon name="chatbubbles-outline"></ion-icon>
+
+
+                <!---- LISTING ---->
+                <div class="pub-listing">
+                    <div class="pub-listing--utility">
+                        <div class="utility--filter">
+                            <div class="filter--criteria">
+                                <button class="button button__remove">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" /></svg>
+                                    <span class="sr-only">Remove</span>
+                                </button>
+                                <span>Search Example</span>
+                            </div>
+                            <div class="filter--criteria">
+                                <button class="button button__remove">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" /></svg>
+                                    <span class="sr-only">Remove</span>
+                                </button>
+                                <span>Search Example</span>
+                            </div>
+                        </div>
+                        <div class="utility--options">
+                            <button class="button button__clear">Clear All Filters</button>
+                            <button class="button button__save-search">Save Search</button>
+                        </div>
+                    </div>
+
+                    <div class="pub-listing--sort">
+                        <button class="button button__sort-toggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sliders-h" class="svg-inline--fa fa-sliders-h fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M496 384H160v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h80v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160h-80v-16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h80c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0-160H288V48c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v16H16C7.2 64 0 71.2 0 80v32c0 8.8 7.2 16 16 16h208v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h208c8.8 0 16-7.2 16-16V80c0-8.8-7.2-16-16-16z" /></svg>
+                            Sort
+                        </button>
+                    </div>
+
+                    @*=========================================================================================================================================*@
+                    <!---- LISTING RESULTS ---->
+
+
+
+                    <div class="pub-listing--results">
+                        @foreach (var item in Model)
+                        {
+                            <div class="publication">
+                                <div class="publication--flag flag__public">Public</div>
+                                <div class="publication--details">
+                                    <div class="publication--title">
+                                        <a href="#" target="_blank">Example Publication Listing Title</a>
+                                    </div>
+                                    <div class="publication--creator">
+                                        <span>Creator(s) Name</span>
+                                        <span>Author(s) Name</span>
+                                    </div>
+                                    <div class="publication--categories">
+                                        <span>Category</span>
+                                        <span>Category</span>
+                                    </div>
+                                </div>
+                                <div class="publication--options">
+                                    <div class="publication--date">published: @item.DatePublication</div>
+                                    <a class="button button__primary button__edit" style="text-decoration:none" asp-action="Edit" asp-controller="Publication" asp-route-id="@item.Id">Edit Post</a>
+                                    <button class="button button__delete" onclick="return Delete(@item.Id)">Delete</button>
+                                </div>
+                            </div>
+                        }
+                         <!---- PAGINATION ---->
+                        <div class="pagination">
+                            <div class="pagination--result-count">
+                                Showing 1-10 of 245 total publications
+                            </div>
+                            <nav class="pagination--result-navigation">
+                                <ul>
+                                    <li><a href="#">&LT;&LT;</a></li>
+                                    <li><a href="#">&LT;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">&GT;</a></li>
+                                    <li><a href="#">&GT;&GT;</a></li>
+                                </ul>
+                            </nav>
+                            <div class="pagination--result-size">
+                                <span>Show:</span>
+                                <a href="#">10</a>
+                                <a href="#">50</a>
+                                <a href="#">100</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- ================ Order Details List ================= 
-            <div class="recentCustomers">
-                <div class="cardHeader">
-                    <h2>Publications</h2>
-                </div>
-                <table>
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="~/images/chimie2.png" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>FSM <br> <span>Laboratoire Chimie</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="~/images/chimie1.png" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>ISIMA <br> <span>departement chimie I</span></h4>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="~/images/chimie2.png" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>FSM <br> <span>Laboratoire Chimie</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="~/images/chimie1.png" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>ISIMA <br> <span>departement chimie I</span></h4>
-                        </td>
-                    </tr>
-                </table>
-            </div>  -->
-            @foreach (var obj in Model)
-                {
-                    {
-                        Structure LaboObject = BLL_Structure.Get(obj.IdLabo);
-                        Produit prodObject = BLL_Produit.Get(obj.IdProduit);
-            <div class="publication">
-                        <h4>
-                            <span>@obj.DatePublication</span>
-                        </h4>
-                        <h4>@LaboObject.Nom<br>
-                            <span>@prodObject.Nom</span>
-                        </h4><br>
-                       
-
-                    <br>
-            </div>
-                    }
-                }
+           
+       
+          
             
         </div>
         
@@ -219,3 +331,46 @@
 </body>
 
 </html>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+
+        //Delete Publication
+        function Delete(id) {
+            Swal.fire({
+                title: 'êtes vous sûr?',
+                text: "voulez vous supprimer cette publication!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, Supprimer!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/Publication/Delete",
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.success) {
+                                alert(data.message)
+                                location.reload();
+                            }
+                            else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+
+                }
+            })
+        }
+
+
+    </script>
+    }
+

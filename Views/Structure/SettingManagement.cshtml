@@ -4,8 +4,9 @@
 @model ChimieProject.Models.Entities.Structure;
 <br />
 <div class="container row p-0 m-0">
+    <partial name="_Notification">
     <div class="col-6">
-        <h2 class="text-info">Book List</h2>
+        <h2 class="text-info">USer Management</h2>
     </div>
     <div class="col-3 offset-3">
         <a class="btn btn-info form-control text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -47,6 +48,7 @@
 @section Scripts{
     @{
     <script src="~/js/SettingManagement.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      }
     
 }
