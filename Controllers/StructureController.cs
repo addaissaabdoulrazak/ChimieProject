@@ -57,7 +57,7 @@ namespace ChimieProject.Controllers
 
         [HttpPost]
         public IActionResult Inscription(StructureDto request)
-        {
+         {
 
             //Structure IsObjectEmailExist = BLL_Structure.GetElementByEmail(request.Email);
 
@@ -102,7 +102,7 @@ namespace ChimieProject.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(StructureDto request)
+        public IActionResult Login(Structure request)
         {
 
             if (string.IsNullOrEmpty(request.Nom) || string.IsNullOrEmpty(request.Password))
