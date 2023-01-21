@@ -238,13 +238,73 @@ namespace ChimieProject.Models.DAL
                 return results;
             }
 
-            #endregion
+        public static List<Produit> recherche(string Nom,string Formule,string CAS,string EtatPhysique)
+        {
+            var dataTable = new DataTable();
+            using (SqlConnection sqlConnection = DBConnection.GetConnection())
+            {
+              //  Migration.CreationTableProduit();
+                sqlConnection.Open();
+                string query = "SELECT * FROM [Produit] WHERE (Nom=@Nom or Formule=@Formule or CAS=@CAS or EtatPhysique=@EtatPhysique)";
+                var sqlCommand = new SqlCommand(query, sqlConnection);
+                if (CAS == null)
+                {
+                    sqlCommand.Parameters.AddWithValue("CAS",  DBNull.Value);
+                }
+                else
+                {
+                    sqlCommand.Parameters.AddWithValue("CAS", CAS);
 
-            #region Custom Methods
+                }
+
+                if (EtatPhysique == null)
+                {
+                    sqlCommand.Parameters.AddWithValue("EtatPhysique", DBNull.Value);
+                }
+                else
+                {
+                    sqlCommand.Parameters.AddWithValue("EtatPhysique", EtatPhysique);
+
+                }
+                if (Nom == null)
+                {
+                    sqlCommand.Parameters.AddWithValue("Nom", DBNull.Value);
+                }
+                else
+                {
+                    sqlCommand.Parameters.AddWithValue("Nom", Nom);
+
+                }
+                if (Formule == null)
+                {
+                    sqlCommand.Parameters.AddWithValue("Formule", DBNull.Value);
+                }
+                else
+                {
+                    sqlCommand.Parameters.AddWithValue("Formule", Formule);
+
+                }
+                       
+                new SqlDataAdapter(sqlCommand).Fill(dataTable);
+            }
+
+            if (dataTable.Rows.Count > 0)
+            {
+                return dataTable.Rows.Cast<DataRow>().Select(x => new Produit(x)).ToList();
+            }
+            else
+            {
+                return new List<Produit>();
+            }
+        }
+
+        #endregion
+
+        #region Custom Methods
 
 
 
-            #endregion
+        #endregion
 
     }
 }

@@ -62,7 +62,7 @@ namespace ChimieProject.Models.DAL
                         "[Quantite] REAL NOT NULL," +
                         "[UniteQuantite] NVARCHAR(32) NOT NULL," +
                         "PRIMARY KEY CLUSTERED([Id] ASC));" +
-                        "ALTER TABLE [dbo].[Publication] add CONSTRAINT  FK_Produit FOREIGN KEY  (IdProduit)  REFERENCES [dbo].[Produit]([Id]);"+
+                        "ALTER TABLE [dbo].[Publication] add CONSTRAINT  FK_Produit FOREIGN KEY  (IdProduit)  REFERENCES [dbo].[Produit]([Id]) ON DELETE CASCADE;"+
                     "ALTER TABLE [dbo].[Publication] add CONSTRAINT  FK_Laboratoire FOREIGN KEY  (IdLabo)  REFERENCES [dbo].[Publication]([Id]);";
                     SqlCommand command = new SqlCommand(requette, connection);
                     command.ExecuteNonQuery();

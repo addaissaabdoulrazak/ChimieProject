@@ -4,10 +4,17 @@
 @{
 }
 
+<div>
+    <button type="button" class="btn btn-primary" style="float:right" onclick="afficherModalRecherche()"><i class="bi bi-search"></i></button>
+    
 
+
+</div>
+<br />
+<br/>
 <div id="pos">
-    <button type="button" class="btn btn-primary" style="float:right" onclick="afficherModal()">ajouter</button>
-
+    <button type="button" class="btn btn-primary" style="float:right" onclick="afficherModal()"><i class="bi bi-plus-circle"></i></button>
+    <button type="button" class="btn btn-secondary" style="float:right" onclick="rechargePage()"><i class="bi bi-arrow-clockwise"></i></button>
 </div>
 <table id="example" class="table table-striped">
     <thead>
@@ -20,7 +27,7 @@
             <th scope="col">Action</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tablebody">
         @if (@ViewBag.Produits != null)
         {
             @foreach (var item in ViewBag.Produits)
@@ -58,8 +65,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel">Modal Ajout</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="fermer()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -78,12 +85,21 @@
                         <label for="CAS">CAS </label>
                         <input type="text" class="form-control" id="CAS" placeholder="CAS" required>
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label for="EtatPhysique">EtatPhysique </label>
                         <input type="text" class="form-control" id="EtatPhysique" placeholder="EtatPhysique" required>
+                    </div>*@
+                    <div class="form-group">
+                        <label for="EtatPhysique"> EtatPhysique</label>
+                        <select name="EtatPhysique" id="EtatPhysique" class="form-select">
+                            <option selected> Choisir l'etat</option>
+                            <option value="SOLIDE">SOLIDE</option>
+                            <option value="LIQUIDE">LIQUIDE</option>
+                            <option value="GAZEUX">GAZEUX</option>
+
+                        </select>
                     </div>
-
-
+         
                     <br />
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
@@ -99,8 +115,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabele">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabele">Modal Modifier</h5>
+                <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -119,11 +135,21 @@
                         <label for="CAS1">CAS </label>
                         <input type="text" class="form-control" id="CAS1" placeholder="CAS" required>
                     </div>
-                    <div class="form-group">
+                   @* <div class="form-group">
                         <label for="EtatPhysique1">EtatPhysique </label>
                         <input type="text" class="form-control" id="EtatPhysique1" placeholder="EtatPhysique" required>
-                    </div>
+                    </div>*@
 
+                     <div class="form-group">
+                        <label for="EtatPhysique1"> EtatPhysique</label>
+                        <select name="EtatPhysique" id="EtatPhysique1" class="form-select">
+                            <option selected> Choisir l'etat</option>
+                            <option value="solid">solid</option>
+                            <option value="liquide">liquide</option>
+                            <option value="gazeux">Gazeux</option>
+
+                        </select>
+                    </div>
 
                     <br />
                     <button type="submit" class="btn btn-primary">Modifier</button>
@@ -134,7 +160,53 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="recherchemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabele" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabele">Recherche Avancé</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="fermer()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="FormRecherche">
+
+                    <div class="form-group">
+                        <label for="Nomrechercher">Nom</label>
+                        <input type="text" class="form-control" id="Nomrechercher" placeholder="Nom rechercher" >
+                    </div>
+                    <div class="form-group">
+                        <label for="Formulerechercher">Formule </label>
+                        <input type="text" class="form-control" id="Formulerechercher" placeholder="Formule" >
+                    </div>
+                    <div class="form-group">
+                        <label for="CASrechercher">CAS </label>
+                        <input type="text" class="form-control" id="CASrechercher" placeholder="CAS" >
+                    </div>
+                    <div class="form-group">
+                        <label for="EtatPhysiquerechercher">EtatPhysique </label>
+                        <input type="text" class="form-control" id="EtatPhysiquerechercher" placeholder="EtatPhysique" >
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-primary">rechercher</button>
+                </form>
+               
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 @section Scripts{
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
     <script src="~/js/Produit.js" asp-append-version="true">
 
     </script>
