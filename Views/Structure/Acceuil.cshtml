@@ -12,6 +12,12 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Dashboard - SB Admin</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/3.3.7/css/sb-admin-2.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css'>
+    <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/416491/timeline.css'>
 
 </head>
 <body class="sb-nav-fixed">
@@ -96,7 +102,89 @@
                     </ol>
 
                     <div class="row">
-                        <div class="col-xl-3 col-md-6">
+
+
+                        @*--------------------------------*@
+
+                        <!-- /.row -->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                               @* <i class="fa fa-comments fa-5x"></i>*@
+                                                <i class="fa-solid fa-right-left fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="huge">26</div>
+                                                <div>Gestion des Publication</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a asp-action="Index" asp-controller="Publication">
+                                        <div class="panel-footer">
+                                            <span class="pull-left">View Details</span>
+                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="panel panel-red">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                               @* <i class="fa fa-support fa-5x"></i>*@
+                                                <i class="fa-solid fa-user-check fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="huge">13</div>
+                                                <div>Gestion Structure</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a asp-action="Index" asp-controller="Structure">
+                                        <div class="panel-footer">
+                                            <span class="pull-left">View Details</span>
+                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="panel panel-green">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">                       
+                                                <i class="fa-sharp fa-solid fa-gears fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="huge">12</div>
+                                                <div>Setting Mangement</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a asp-action="SettingManagement" asp-controller="Structure">
+                                        <div class="panel-footer">
+                                            <span class="pull-left">View Details</span>
+                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+
+                        @*--------------------------------*@
+
+
+@*                        <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Gestion Publication</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -122,12 +210,21 @@
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </main>
         </div>
     </div>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+    <script src='https://code.jquery.com/jquery-3.1.0.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/3.3.7/js/sb-admin-2.js'></script>
+    <script src='https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js'></script>
 
 </body>
 </html>
