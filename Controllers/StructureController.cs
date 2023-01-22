@@ -211,6 +211,7 @@ namespace ChimieProject.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult EditStructure(Structure request)
         {
             return View();

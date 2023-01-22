@@ -2,6 +2,11 @@
     Layout = "_Setting";
 }
 @model ChimieProject.Models.Entities.Structure;
+
+@*----*@
+@* In this view we have used a Jquery DataTable Function*@
+@*----*@
+
 <br />
 <div class="container row p-0 m-0">
     <partial name="_Notification">
@@ -39,6 +44,7 @@
             <div class="modal-body">
                 @*Inject my partial View  | _UpsertPartialView |*@
                 <partial name="~/Views/_UpsertPartialView.cshtml" model="@Model" />
+                <partial name="_Notification">
             </div>
 
         </div>
