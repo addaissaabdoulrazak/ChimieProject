@@ -217,9 +217,16 @@ namespace ChimieProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditStructure(Structure request)
+        public IActionResult EditStructure(long id)
         {
-            return View();
+            Structure structure = BLL_Structure.Get(id);
+            if (structure != null)
+            {
+                BLL_Structure.Update(structure);
+                TempData["success"] = "Publication modifier avec succès";
+                return RedirectToAction("SettingManagement");
+            }
+            return View(structure);
         }
 
 
