@@ -104,6 +104,8 @@ namespace ChimieProject.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(Structure request)
         {
+            ISession session = HttpContext.Session;
+
 
             if (string.IsNullOrEmpty(request.Nom) || string.IsNullOrEmpty(request.Password))
             {
@@ -114,7 +116,7 @@ namespace ChimieProject.Controllers
 
             Structure objLab = _jwtAuthenticationService.Authenticate(request.Nom);
 
-
+            session.Set("currentUser", objLab);
 
             if (objLab != null)
             {
@@ -144,6 +146,9 @@ namespace ChimieProject.Controllers
                         HttpContext.Session.SetString("Token", Token);
 
                     }
+                    //ViewBag.currentUser=objLab;
+
+                    long id = objLab.Id;
                     return RedirectToAction("Acceuil", "Dashboard");
 
                 }

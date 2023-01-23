@@ -160,11 +160,12 @@ namespace ChimieProject.Models.DAL
 
         public static int Insert(Structure item)
         {
+            CreateTable();
             int response = int.MinValue;
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
                 sqlConnection.Open();
-                CreateTable();
+                
                 var sqlTransaction = sqlConnection.BeginTransaction();
 
                 //testez voir

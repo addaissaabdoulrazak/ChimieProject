@@ -69,7 +69,7 @@ namespace ChimieProject.Models.DAL
             }
 
             public static long Insert(Publication item)
-        {
+            {
             CreateTable();
             long response = long.MinValue;
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())

@@ -3,8 +3,12 @@
 
 @{
     Layout = "_UserUI";
+    var objListPublication = ViewBag.ListPublication;
+   var currentUser = ViewBag.currentUser;
 }
-@model IEnumerable<ChimieProject.Models.Entities.Publication>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,10 +17,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+@*    ----------------------------------------------------------------[Test Boostrap Version]-------------------------------------------------------------------------*@
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+     
+    @*    ----------------------------------------------------------------[Test Boostrap Version]-------------------------------------------------------------------------*@
+    
+    <!-- Adding W3.CSS file through external link -->
+    <link rel="stylesheet" href=
+        "https://www.w3schools.com/w3css/4/w3.css">
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="~/css/UserAcceuil.css">
-  @*  <link href="~/css/publication.css" rel="stylesheet" />*@
-      <link href="~/css/test.css" rel="stylesheet" />
+    <link href="~/css/publication.css" rel="stylesheet" />
+     @* <link href="~/css/test.css" rel="stylesheet" />*@
 </head>
 
 <body>
@@ -103,7 +119,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a asp-action="LogOut" asp-controller="Structure">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -148,7 +164,7 @@
                         <button class="button button__primary button__search">Search</button>
                     </fieldset>
                     <div class="pub-header--create">
-                        <button class="button button__primary button__create" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Publication</button>
+                    <a class="button button__primary button__create" asp-action="Upsert" asp-controller="Dashboard">Create Publication</a>
                     </div>
                 </div>
                 <!---- SIDEBAR ---->
@@ -221,9 +237,6 @@
                         </fieldset>
                     </div>
                 </div>
-
-
-
                 <!---- LISTING ---->
                 <div class="pub-listing">
                     <div class="pub-listing--utility">
@@ -258,33 +271,49 @@
 
                     @*=========================================================================================================================================*@
                     <!---- LISTING RESULTS ---->
-
-
-
                     <div class="pub-listing--results">
-                        @foreach (var item in Model)
+                    @foreach (var item in objListPublication)
                         {
+                         
+                            var publicationCreator = BLL_Structure.Get(item.IdLabo);
+                            var objProduct = BLL_Produit.Get(item.IdProduit);
+
+                        if (@currentUser.Statut == 1)
+                            {
+
                             <div class="publication">
-                                <div class="publication--flag flag__public">Public</div>
+                              @*  <div class="publication--flag flag__public">@publicationCreator.Nom</div>*@
                                 <div class="publication--details">
                                     <div class="publication--title">
-                                        <a href="#" target="_blank">Example Publication Listing Title</a>
+                                        <a href="#" target="_blank"> Publication Listing Title <strong class="w3-badge w3-pink w3-round">@item.Type</strong></a>
                                     </div>
                                     <div class="publication--creator">
                                         <span>Creator(s) Name</span>
-                                        <span>Author(s) Name</span>
+                                        <strong>@publicationCreator.Nom</strong>
                                     </div>
                                     <div class="publication--categories">
-                                        <span>Category</span>
-                                        <span>Category</span>
+                                        <span>Produit</span>
+                                        <Strong>@objProduct.Nom</Strong>
                                     </div>
                                 </div>
                                 <div class="publication--options">
-                                    <div class="publication--date">published: @item.DatePublication</div>
-                                    <a class="button button__primary button__edit" style="text-decoration:none" asp-action="Edit" asp-controller="Publication" asp-route-id="@item.Id">Edit Post</a>
-                                    <button class="button button__delete" onclick="return Delete(@item.Id)">Delete</button>
+                                    <div class="publication--date"><strong>published: @item.DatePublication</strong> </div>
+                                    <br>
+                                    <div class="publication--date"><strong class="publication--flag flag__public">Premption: @item.DatePeremption</strong> </div>
+                                    
+                                    @if(item.IdLabo == currentUser.Id)
+                                    {
+                                        <a class="button button__primary button__edit" style="text-decoration:none" asp-action="Upsert" asp-controller="Dashboard" asp-route-id="@item.Id">Edit Post</a>
+                                        <button class="button button__delete" onclick="return Delete(@item.Id)">Delete</button>
+
+                                    }else{
+
+                                    }
                                 </div>
                             </div>
+                            }
+                            //Get Produit and Structure item
+                     
                         }
                          <!---- PAGINATION ---->
                         <div class="pagination">
@@ -313,15 +342,9 @@
                         </div>
                     </div>
                 </div>
-           
-       
-          
-            
         </div>
-        
     </div>
-   
-    
+
     <!-- =========== Scripts =========  -->
     <script src="~/js/UserAcceuil.js"></script>
 
@@ -331,9 +354,10 @@
 </body>
 
 </html>
+
 @section Scripts{
     @{
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
     }
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -371,6 +395,23 @@
         }
 
 
+          function Upsert(id,currentUserIdd) {
+          
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/Dashboard/Upsert",
+                        data: { id: id , currentUserId :currentUserIdd },
+                        success: function (data) {
+                            if (data.success) {
+                                alert(data.message)
+                                location.reload();
+                            }
+                            else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+        }
     </script>
     }
 

@@ -74,16 +74,17 @@
                             <div class="c-menu-item__title"><span>Statistics</span></div>
                         </div>
                     </li>
-                    <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
-                        <div class="c-menu__item__inner">
-                            <i class="fa fa-gift"></i>
-                            <div class="c-menu-item__title"><span>Gifts</span></div>
-                        </div>
-                    </li>
+                  
                     <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Settings">
                         <div class="c-menu__item__inner">
                             <i class="fa fa-cogs"></i>
-                            <div class="c-menu-item__title"><span>Settings</span></div>
+                            <a class="c-menu-item__title" asp-action="Acceuil" asp-controller="Structure" style="text-decoration:none"><span>Acceuil</span></a>
+                        </div>
+                    </li>
+                    <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Gifts">
+                        <div class="c-menu__item__inner">
+                            <i class="fa fa-gift"></i>
+                            <a class="c-menu-item__title" asp-action="Logout" asp-controller="Structure" style="text-decoration:none"><span>LogOut</span></a>
                         </div>
                     </li>
                 </ul>
