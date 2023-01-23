@@ -4,212 +4,445 @@
 @{
 }
 
-<div>
-    <button type="button" class="btn btn-primary" style="float:right" onclick="afficherModalRecherche()"><i class="bi bi-search"></i></button>
-    
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="~/css/UserAcceuil.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container-fuild">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+
+                        <div class="IconAcceuil">
+                            <img src="~/images/la-science.png" alt="">
+                            <div class="">
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Dashboard/Acceuil">
+                        <span class="icon">
+                            <ion-icon name="list-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Mes Publications</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Dashboard/Acceuil">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Les Publications</span>
+                    </a>
+                </li>
 
 
-</div>
-<br />
-<br/>
-<div id="pos">
-    <button type="button" class="btn btn-primary" style="float:right" onclick="afficherModal()"><i class="bi bi-plus-circle"></i></button>
-    <button type="button" class="btn btn-secondary" style="float:right" onclick="rechargePage()"><i class="bi bi-arrow-clockwise"></i></button>
-</div>
-<table id="example" class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Formule</th>
-            <th scope="col">CAS</th>
-            <th scope="col">EtatPhysique</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody id="tablebody">
-        @if (@ViewBag.Produits != null)
-        {
-            @foreach (var item in ViewBag.Produits)
+                <li>
+                    <a href="/Produit/Index">
+                        <span class="icon">
+                            <i class="bi bi-list-check"></i>
+                        </span>
+                        <span class="title">Produits</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                        </span>
+                        <span class="title">Password</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+               @*@* <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>*@
+                <div>
+                    <label class="search">
+                    <input type="text" onclick="afficherModalRecherche()">
+                    <i class="bi bi-search"></i>
+
+                        </label>
+                </div>
+
+                <div class="user">
+                    <img src="~/images/profil.png" alt="">
+                </div>
+            </div>
+
+            <!-- ======================= Cards ================== -->
+           @* <div class="cardBox">
+                <div class="card">
+
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="iconBx">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>*@
+            <!-- ================ Order Details List =================
+            <div class="recentCustomers">
+                <div class="cardHeader">
+                    <h2>Publications</h2>
+                </div>
+                <table>
+                    <tr>
+                        <td width="60px">
+                            <div class="imgBx"><img src="~/images/chimie2.png" alt=""></div>
+                        </td>
+                        <td>
+                            <h4>FSM <br> <span>Laboratoire Chimie</span></h4>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="60px">
+                            <div class="imgBx"><img src="~/images/chimie1.png" alt=""></div>
+                        </td>
+                        <td>
+                            <h4>ISIMA <br> <span>departement chimie I</span></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60px">
+                            <div class="imgBx"><img src="~/images/chimie2.png" alt=""></div>
+                        </td>
+                        <td>
+                            <h4>FSM <br> <span>Laboratoire Chimie</span></h4>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="60px">
+                            <div class="imgBx"><img src="~/images/chimie1.png" alt=""></div>
+                        </td>
+                        <td>
+                            <h4>ISIMA <br> <span>departement chimie I</span></h4>
+                        </td>
+                    </tr>
+                </table>
+            </div>  -->
+
+
+      
+      
+   
+            <div id="pos">
+                <button type="button" class="btn btn-secondary" style="float:right; background: #0B5345" onclick="afficherModal()">Ajouter</button>
+                <button type="button" class="btn btn-secondary" style="float:right" onclick="rechargePage()"><i class="bi bi-arrow-clockwise"></i></button>
+            </div>
+           @* <table id="example" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Formule</th>
+                        <th scope="col">CAS</th>
+                        <th scope="col">EtatPhysique</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tablebody">
+                    @if (@ViewBag.Produits != null)
+                    {
+                        @foreach (var item in ViewBag.Produits)
+                        {
+                            <tr>
+                                <th scope="row">@item.Id</th>
+                                <td>@item.Nom</td>
+                                <td>@item.Formule</td>
+                                <td>@item.CAS</td>
+                                <td>@item.EtatPhysique</td>
+                                <td>
+                                    <!-- button Modifier-->
+                                    <button type="submit" class="btn btn-secondary" onclick="rechercher(@item.Id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg>
+                                    </button>
+                                    <!-- button supprimer-->
+                                    <button type="submit" class="btn btn-danger" onclick="Supprimer(@item.Id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                        </svg>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>*@
+
+            <!-- modal ajout-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background: #CACFD2 ">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal Ajout</h5>
+                            <button type="button" class="close" data-dismiss="modal" onclick="fermerAjout()" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="FormAjouter">
+
+                                <div class="form-group">
+                                    <label for="Nom">Nom</label>
+                                    <input type="text" class="form-control" id="Nom" placeholder="Nom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Formule">Formule </label>
+                                    <input type="text" class="form-control" id="Formule" placeholder="Formule" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CAS">CAS </label>
+                                    <input type="text" class="form-control" id="CAS" placeholder="CAS" required>
+                                </div>
+                                @*<div class="form-group">
+                                <label for="EtatPhysique">EtatPhysique </label>
+                                <input type="text" class="form-control" id="EtatPhysique" placeholder="EtatPhysique" required>
+                                </div>*@
+                                <div class="form-group">
+                                    <label for="EtatPhysique"> EtatPhysique</label>
+                                    <select name="EtatPhysique" id="EtatPhysique" class="form-select">
+                                        <option selected> Choisir l'etat</option>
+                                        <option value="SOLIDE">SOLIDE</option>
+                                        <option value="LIQUIDE">LIQUIDE</option>
+                                        <option value="GAZEUX">GAZEUX</option>
+
+                                    </select>
+                                </div>
+
+                                <br />
+                                <button type="submit" class="btn btn-primary" style="background: #0B5345">Ajouter</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!--modal modification-->
+
+            <div class="modal fade" id="Editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabele" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background:#CACFD2 ">
+                            <h5 class="modal-title" id="exampleModalLabele" >Modal Modifier</h5>
+                            <button type="button" class="close" data-dismiss="modal" onclick="fermerEdit()" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="FormEditer">
+
+                                <div class="form-group">
+                                    <label for="Nom1">Nom</label>
+                                    <input type="text" class="form-control" id="Nom1" placeholder="Nom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Formule1">Formule </label>
+                                    <input type="text" class="form-control" id="Formule1" placeholder="Formule" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CAS1">CAS </label>
+                                    <input type="text" class="form-control" id="CAS1" placeholder="CAS" required>
+                                </div>
+                                @* <div class="form-group">
+                                <label for="EtatPhysique1">EtatPhysique </label>
+                                <input type="text" class="form-control" id="EtatPhysique1" placeholder="EtatPhysique" required>
+                                </div>*@
+
+                                <div class="form-group">
+                                    <label for="EtatPhysique1"> EtatPhysique</label>
+                                    <select name="EtatPhysique" id="EtatPhysique1" class="form-select">
+                                        <option selected> Choisir l'etat</option>
+                                        <option value="solid">solid</option>
+                                        <option value="liquide">liquide</option>
+                                        <option value="gazeux">Gazeux</option>
+
+                                    </select>
+                                </div>
+
+                                <br />
+                                <button type="submit" class="btn btn-secondary" style="background: #0B5345">Modifier</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal recherche avancé-->
+            <div class="modal fade" id="recherchemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabele" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background:#CACFD2 ">
+                            <h5 class="modal-title" id="exampleModalLabele">Recherche Avancé</h5>
+                            <button type="button" class="close" data-dismiss="modal" onclick="fermer()" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="FormRecherche">
+
+                                <div class="form-group">
+                                    <label for="Nomrechercher">Nom</label>
+                                    <input type="text" class="form-control" id="Nomrechercher" placeholder="Nom rechercher">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Formulerechercher">Formule </label>
+                                    <input type="text" class="form-control" id="Formulerechercher" placeholder="Formule">
+                                </div>
+                                <div class="form-group">
+                                    <label for="CASrechercher">CAS </label>
+                                    <input type="text" class="form-control" id="CASrechercher" placeholder="CAS">
+                                </div>
+                                <div class="form-group">
+                                    <label for="EtatPhysiquerechercher">EtatPhysique </label>
+                                    <input type="text" class="form-control" id="EtatPhysiquerechercher" placeholder="EtatPhysique">
+                                </div>
+                                <br />
+                                <button type="submit" class="btn btn-primary">rechercher</button>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/> <br />
+            @if (@ViewBag.Produit != null)
             {
-                <tr>
-                    <th scope="row">@item.Id</th>
-                    <td>@item.Nom</td>
-                    <td>@item.Formule</td>
-                    <td>@item.CAS</td>
-                    <td>@item.EtatPhysique</td>
-                    <td>
-                        <!-- button Modifier-->
-                        <button type="submit" class="btn btn-secondary" onclick="rechercher(@item.Id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                            </svg>
-                        </button>
-                        <!-- button supprimer-->
-                        <button type="submit" class="btn btn-danger" onclick="Supprimer(@item.Id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                            </svg>
-                        </button>
-                    </td>
+                @foreach (var chunks in ViewBag.Produit)
+                {
 
-                </tr>
+                    <div class="row">
+                        @foreach (var item in chunks)
+                        {
+                            <div class="col-4">
+                                <div class="card border-dark mb-3" style="max-width: 18rem; margin-left:20px;">
+                                    <div class="card-header" style="color:white;">@item.Nom</div>
+                                    <div class="card-body text-dark">
+                                        <h5 class="card-title">Formule : @item.Formule</h5>
+                                        <p class="card-text">CAS : @item.CAS</p>
+                                        <p class="card-text">EtatPhysique : @item.EtatPhysique</p>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-success">
+                                        <button type="submit" class="btn btn-secondary" onclick="rechercher(@item.Id)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>
+                                        </button>
+                                        <!-- button supprimer-->
+                                        <button type="submit" class="btn btn-danger" onclick="Supprimer(@item.Id)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                }
+
             }
-        }
 
-
-    </tbody>
-</table>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal Ajout</h5>
-                <button type="button" class="close" data-dismiss="modal" onclick="fermer()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="FormAjouter">
-
-                    <div class="form-group">
-                        <label for="Nom">Nom</label>
-                        <input type="text" class="form-control" id="Nom" placeholder="Nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Formule">Formule </label>
-                        <input type="text" class="form-control" id="Formule" placeholder="Formule" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="CAS">CAS </label>
-                        <input type="text" class="form-control" id="CAS" placeholder="CAS" required>
-                    </div>
-                    @*<div class="form-group">
-                        <label for="EtatPhysique">EtatPhysique </label>
-                        <input type="text" class="form-control" id="EtatPhysique" placeholder="EtatPhysique" required>
-                    </div>*@
-                    <div class="form-group">
-                        <label for="EtatPhysique"> EtatPhysique</label>
-                        <select name="EtatPhysique" id="EtatPhysique" class="form-select">
-                            <option selected> Choisir l'etat</option>
-                            <option value="SOLIDE">SOLIDE</option>
-                            <option value="LIQUIDE">LIQUIDE</option>
-                            <option value="GAZEUX">GAZEUX</option>
-
-                        </select>
-                    </div>
-         
-                    <br />
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                </form>
-
-            </div>
         </div>
+
     </div>
-</div>
 
 
+    <!-- =========== Scripts =========  -->
+    <script src="~/js/UserAcceuil.js"></script>
 
-<div class="modal fade" id="Editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabele" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabele">Modal Modifier</h5>
-                <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="FormEditer">
-
-                    <div class="form-group">
-                        <label for="Nom1">Nom</label>
-                        <input type="text" class="form-control" id="Nom1" placeholder="Nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Formule1">Formule </label>
-                        <input type="text" class="form-control" id="Formule1" placeholder="Formule" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="CAS1">CAS </label>
-                        <input type="text" class="form-control" id="CAS1" placeholder="CAS" required>
-                    </div>
-                   @* <div class="form-group">
-                        <label for="EtatPhysique1">EtatPhysique </label>
-                        <input type="text" class="form-control" id="EtatPhysique1" placeholder="EtatPhysique" required>
-                    </div>*@
-
-                     <div class="form-group">
-                        <label for="EtatPhysique1"> EtatPhysique</label>
-                        <select name="EtatPhysique" id="EtatPhysique1" class="form-select">
-                            <option selected> Choisir l'etat</option>
-                            <option value="solid">solid</option>
-                            <option value="liquide">liquide</option>
-                            <option value="gazeux">Gazeux</option>
-
-                        </select>
-                    </div>
-
-                    <br />
-                    <button type="submit" class="btn btn-primary">Modifier</button>
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="recherchemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabele" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabele">Recherche Avancé</h5>
-                <button type="button" class="close" data-dismiss="modal" onclick="fermer()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="FormRecherche">
-
-                    <div class="form-group">
-                        <label for="Nomrechercher">Nom</label>
-                        <input type="text" class="form-control" id="Nomrechercher" placeholder="Nom rechercher" >
-                    </div>
-                    <div class="form-group">
-                        <label for="Formulerechercher">Formule </label>
-                        <input type="text" class="form-control" id="Formulerechercher" placeholder="Formule" >
-                    </div>
-                    <div class="form-group">
-                        <label for="CASrechercher">CAS </label>
-                        <input type="text" class="form-control" id="CASrechercher" placeholder="CAS" >
-                    </div>
-                    <div class="form-group">
-                        <label for="EtatPhysiquerechercher">EtatPhysique </label>
-                        <input type="text" class="form-control" id="EtatPhysiquerechercher" placeholder="EtatPhysique" >
-                    </div>
-                    <br />
-                    <button type="submit" class="btn btn-primary">rechercher</button>
-                </form>
-               
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-@section Scripts{
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 
     <script src="~/js/Produit.js" asp-append-version="true">
 
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-}
+</body>
 
+</html>

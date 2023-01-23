@@ -262,7 +262,8 @@ namespace ChimieProject.Models.DAL
             var dataTable = new DataTable();
             using (SqlConnection sqlConnection = DBConnection.GetConnection())
             {
-              //  Migration.CreationTableProduit();
+                //  Migration.CreationTableProduit();
+                Migration.CreationTableEchangeLot();
                 sqlConnection.Open();
                 string query = "SELECT * FROM [Produit] WHERE (Nom=@Nom or Formule=@Formule or CAS=@CAS or EtatPhysique=@EtatPhysique)";
                 var sqlCommand = new SqlCommand(query, sqlConnection);

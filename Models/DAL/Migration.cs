@@ -79,6 +79,48 @@ namespace ChimieProject.Models.DAL
    
         }
 
+
+        public static Message CreationTableEchangeLot()
+        {
+
+            using (SqlConnection connection = DBConnection.GetConnection())
+            {
+                try
+                {
+
+                    connection.Open();
+                    string requette = "If not exists (select * from sysobjects where name = 'EchangeLot')" +
+                        " CREATE TABLE [dbo].[EchangeLot] " +
+                        "([Id]  BIGINT  IDENTITY(1, 1) NOT NULL," +
+                        " [IdLabo]  BIGINT NOT NULL," +
+                        "[IdProduit] BIGINT  NOT NULL," +
+                        "[Type] NVARCHAR(32) NOT NULL," +
+                        "[DatePublication] DATETIME NOT NULL," +
+                        "[Purete] NVARCHAR(32) NOT NULL," +
+                        "[Concentration] NVARCHAR(32) NOT NULL," +
+                        "[DatePeremption] DATETIME NOT NULL," +
+                        "[Quantite] REAL NOT NULL," +
+                        "[UniteQuantite] NVARCHAR(32) NOT NULL," +
+                        "PRIMARY KEY CLUSTERED([Id] ASC));" +
+                        "ALTER TABLE [dbo].[Publication] add CONSTRAINT  FK_Produit FOREIGN KEY  (IdProduit)  REFERENCES [dbo].[Produit]([Id]) ON DELETE CASCADE;" +
+                    "ALTER TABLE [dbo].[Publication] add CONSTRAINT  FK_Laboratoire FOREIGN KEY  (IdLabo)  REFERENCES [dbo].[Publication]([Id]);";
+                    SqlCommand command = new SqlCommand(requette, connection);
+                    command.ExecuteNonQuery();
+
+                    return new Message(true, "Table crée avec succé ");
+                }
+                catch (Exception ex)
+                {
+                    return new Message(false, ex.Message.ToString());
+                }
+                finally { connection.Close(); }
+            }
+
+
+        }
+
+
+
         public static Message CreationTableLaboratoire()
         {
             using (SqlConnection connection = DBConnection.GetConnection())

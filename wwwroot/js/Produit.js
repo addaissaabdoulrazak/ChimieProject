@@ -56,6 +56,12 @@ function rechercheAvance() {
 function fermer() {
     $("#recherchemodal").modal("hide")
 }
+function fermerEdit(){
+    $("#Editmodal").modal("hide")
+}
+function fermerAjout() {
+    $("#exampleModal").modal("hide")
+}
 function rechargePage() {
     location.reload()
 }
@@ -84,7 +90,7 @@ function ajouter() {
             EtatPhysique: $("#EtatPhysique").val()
         }
     }, function (resultat) {
-        if (resultat.etat == true) {
+        if (resultat.etat === true) {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -92,11 +98,11 @@ function ajouter() {
                 showConfirmButton: false,
                 timer: 50000
             })
-            location.reload()
+           // location.reload()
         } else {
             Swal.fire({
                 position: 'center',
-                icon: 'warning',
+                icon: 'sucess',
                 title: resultat.message,
                 showConfirmButton: false,
                 timer: 1500
@@ -179,7 +185,7 @@ function Supprimer(Id) {
                 } else {
                     Swal.fire({
                         position: 'center',
-                        icon: 'warning',
+                        icon: 'success',
                         title: r.message,
                         showConfirmButton: false,
                         timer: 1500

@@ -11,6 +11,7 @@ namespace ChimieProject.Controllers
         public IActionResult Index()
         {
             ViewBag.Produits = BLL_Produit.GetAll();
+            ViewBag.Produit = BLL_Produit.GetAll().Chunk(3);
             return View();
         }
         public IActionResult Add(Produit produit)

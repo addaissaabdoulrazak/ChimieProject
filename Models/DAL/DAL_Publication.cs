@@ -47,7 +47,9 @@ namespace ChimieProject.Models.DAL
 
             public static List<Publication> Get()
             {
-                var dataTable = new DataTable();
+            //Migration.CreationTableEchangeLot();
+
+            var dataTable = new DataTable();
                 using (SqlConnection sqlConnection = DBConnection.GetConnection())
                 {
                 Migration.CreationTablePublication();
